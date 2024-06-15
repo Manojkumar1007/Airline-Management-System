@@ -1,0 +1,23 @@
+
+ .greetings {
+    position: absolute;
+    right: 10%;
+    top: 60%;
+    text-align: right;
+    max-width: 300px;
+}
+.book-btn{
+    
+    background: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #fff;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+
+}
+.ho{
+    background-image: url('https://w0.peakpx.com/wallpaper/523/823/HD-wallpaper-airplane-ultra-motors-airplane-airport-taking-off.jpg');
+}
