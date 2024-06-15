@@ -1,0 +1,17 @@
+.airlines{
+   padding: 10px;
+}
+.paths li{
+  display: inline;
+  padding: 10px;
+
+}
+.paths{
+    text-align: right;
+    align-items: flex-end;
+}
+.navbar{
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+   }
