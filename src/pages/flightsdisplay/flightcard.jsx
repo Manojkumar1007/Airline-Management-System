@@ -20,7 +20,7 @@ function Flightcard(props) {
       <div className="con">
         <div className="col0">
            <h4 className="air">
-           {props.flightname}
+           {props.flightname}<br />
            <span className="flightnum">{props.flightnum}</span>
          </h4>
         </div>

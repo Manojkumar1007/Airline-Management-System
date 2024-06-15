@@ -37,6 +37,7 @@ const Searchflights = () => {
                 <option value='Mumbai'>Mumbai</option>
                 <option value='Delhi'>Delhi</option>
                 <option value='Chennai'>Chennai</option>
+                <option value= 'Ahmedabad'>Ahmedabad</option>
                 {/* Add more options as needed */}
               </select><br />
             </div>
@@ -48,6 +49,7 @@ const Searchflights = () => {
                 <option value='Kolkata'>Kolkata</option>
                 <option value='Hyderabad'>Hyderabad</option>
                 <option value='Pune'>Pune</option>
+                <option value='Vishakapatnam'>Vishakapatnam</option>
                 {/* Add more options as needed */}
               </select><br />
             </div>
