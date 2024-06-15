@@ -116,11 +116,12 @@
 }
 
 .form-control {
-    width: 100%;
+    width: 98%;
     padding: 10px;
+    margin-right: 10px;
     margin-bottom: 10px;
-    border: 1px solid;
-    border-radius: 5px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
 }
 
 .gender-options {
