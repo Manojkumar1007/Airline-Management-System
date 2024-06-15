@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Searchflights from './pages/Searchflights/searchflights';
 import Login from './pages/Login/Login';
