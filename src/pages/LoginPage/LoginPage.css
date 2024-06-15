@@ -15,6 +15,8 @@ body {
     box-shadow: 0 0 10px rgba(118, 50, 154, 0.498);
     width: 300px;
     text-align: center;
+    margin-left: 38%;
+    margin-top: 5%;
 }
 
 h2 {
