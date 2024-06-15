@@ -44,8 +44,8 @@ function App() {
          <Route path='/seatselection' element ={<Info.Provider value={{allInf,setAllInf}}><Seatselection /></Info.Provider>} />
          <Route path='/finalconfirmation' element={<Info.Provider value={{allInf,setAllInf}}><Finalconfirmation /></Info.Provider>} />
          <Route path ='/bookingsuccess' element={<Bookingsuccess />} />
-         <Route path = '/loginpage' element = {<LoginPage />} />
-         <Route path = '/signup_page' element = {<Signup_page />} />
+         <Route path = '/login' element = {<LoginPage />} />
+         <Route path = '/signup' element = {<Signup_page />} />
      </Routes>
      
     </BrowserRouter>
