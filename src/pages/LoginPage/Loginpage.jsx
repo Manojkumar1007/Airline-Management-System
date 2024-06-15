@@ -23,7 +23,7 @@ function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.prevent.default();
+    e.preventDefault();
     await login(user1);
   }
   return (

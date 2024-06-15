@@ -24,7 +24,6 @@ function Signup_page(){
         const success = await signup(user);
         if(success){
             navigate("/login",{replace:true});
-            alert("user signed successfully");
             setUser({
                 username: "",
                 email:"",
@@ -51,6 +50,7 @@ function Signup_page(){
                 <button type="submit">Sign Up</button>
             </form>
             <p>Already have an account? <Link to="/login">Login here</Link></p>
+            {error && <div className='error'>{error}</div>}
         </div>
     );
 }
