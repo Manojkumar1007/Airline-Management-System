@@ -1,11 +1,9 @@
 
 import {useState} from "react";
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
 import { Link } from "react-router-dom";
 import {useLogin} from "./useLogin"
 import "./LoginPage.css";
-import { useAuthContext } from "./../../auth/useAuthContext";
+import { useAuthContext } from "../../auth/useAuthContext";
 
 function LoginPage() {
 
