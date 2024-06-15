@@ -13,7 +13,13 @@ const Selecttravaeller = () => {
     const navigate = useNavigate()
     const [seat,setSeat] = useState(false);
     if(seat){
-        return navigate('/seatselection')
+        if(firstname && lastname && dob && email){
+            return navigate('/seatselection');
+        }
+        else{
+            alert("Please fill in all the details.");
+        }
+        
     }
     return (
         <div className="tt">

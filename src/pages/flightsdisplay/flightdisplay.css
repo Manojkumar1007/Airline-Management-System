@@ -1,5 +1,5 @@
 #root{
-  margin-top: 250px;
+  margin-top: 200px;
 }
 .con{
   display: flex;
@@ -12,6 +12,9 @@
   width: 90%;
   margin-left: 5%;
   box-shadow: black;
+}
+.col0{
+  width: 15%;
 }
 .col1 {
   width: 10%;
