@@ -22,6 +22,9 @@ const bcrypt = require("bcrypt");
 //path for static verified page 
 const path = require("path");
 
+//express-validator
+const { body, validationResult } = require('express-validator');
+
 //nodemailer stuff
 let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -41,15 +44,19 @@ transporter.verify((error,success) => {
     }
 })
 
+function trimString(value){
+    return typeof value === 'string' ? value.trim() : value 
+}
+
 //Signup
 router.post('/signup',(req,res) => {
-    let {name, email, password, dateOfBirth} = req.body;
-    name = name.trim();
-    email = email.trim();
-    password = password.trim();
-    dateOfBirth = dateOfBirth.trim();
+    let {name, email, password} = req.body;
+    name = trimString(name);
+    email = trimString(email);
+    password = trimString(password);
+    //dateOfBirth = dateOfBirth.trim();
 
-    if(name == "" || email == "" || password == "" || dateOfBirth == ""){
+    if(name == "" || email == "" || password == ""){
         res.json({
             status: "FAILED",
             message: "Empty input fields!"
@@ -63,11 +70,6 @@ router.post('/signup',(req,res) => {
         res.json({
             status: "FAILED",
             message: "Invalid email entered"
-        });
-    }else if(!new Date(dateOfBirth).getTime()){
-        res.json({
-            status: "FAILED",
-            message: "Invalid date of birth entered"
         });
     }else if(password.length < 8){
         res.json({
@@ -93,7 +95,7 @@ router.post('/signup',(req,res) => {
                         name,
                         email,
                         password: hashedPassword,
-                        dateOfBirth
+                        //dateOfBirth
                     });
 
                     newUser.save().then(result => {

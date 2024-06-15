@@ -1,40 +1,40 @@
 import {useState} from "react";
 import axios from 'axios';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { Link } from "react-router-dom";
+import {useLogin} from "./useLogin"
 import "./LoginPage.css";
+import { useAuthContext } from "./../../auth/useAuthContext";
 
 function LoginPage() {
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
+  const {user} = useAuthContext()
 
-    const { email , password } = formData;
-    const history = useHistory();
+  const {login,error} = useLogin()
+  const [user1,setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const handleInput = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setUser({...user1, [name]:value})
+  
+  };
 
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-    const onSubmit = async e => {
-        e.preventDefault();
-        try {
-            await axios.post('http://localhost:5000/user/signin', formData);
-            history.push('/home');
-        } catch (error) {
-            console.error(error.response.data);
-        }
-    }
-
+  const handleSubmit = async (e) => {
+    e.prevent.default();
+    await login(user1);
+  }
   return (
     <div className="container">
       <h2>Login</h2>
-      <form id="loginForm" onSubmit={onSubmit}>
+      <form id="loginForm" onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={email} onChange={onChange} required />
+        <input type="email" id="email" name="email" value={user1.email} onChange={handleInput} required />
 
         <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" value={password} onChange={onChange} required />
+        <input type="password" id="password" name="password" value={user1.password} onChange={handleInput} required />
 
         <button className="LoginButton" type="submit">
           Login
@@ -43,6 +43,7 @@ function LoginPage() {
       <p>
         Don&apos;t have an account? <Link to="/signup">Sign up here </Link>
       </p>
+      {error && <div className='error'>{error}</div>}
     </div>
   );
 }
