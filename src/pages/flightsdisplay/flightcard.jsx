@@ -17,7 +17,7 @@ function Flightcard(props) {
   }
   return (
     <div className="card">
-      <div className="container">
+      <div className="con">
         <div className="col0">
            <h4 className="air">
            {props.flightname}
