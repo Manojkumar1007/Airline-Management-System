@@ -11,6 +11,10 @@ import Finalconfirmation from './pages/finalconformation/finalconfirmation.jsx';
 import Bookingsuccess from './pages/bookingsucessfull/bookingsucessfull.jsx';
 import LoginPage from './pages/LoginPage/Loginpage.jsx';
 import Signup_page from './pages/signup_page/signup_page.jsx';
+import CheckInForm from './pages/checkin/checkin.jsx';
+import CheckInDetails from './pages/checkin_details/checkin_details.jsx';
+import Itinerary from './pages/Itinerary/itinerary.jsx';
+import Confirmation from './pages/checkin_confirmation/confirmation.jsx';
 import { Info } from './Helper/helper.jsx';
 import { useState } from 'react';
 function App() {
@@ -30,7 +34,8 @@ function App() {
     lastname:'',
     dob:'',
     email:'',
-    seat:''
+    seat:'',
+    baggage:''
   });
   return (
     <BrowserRouter>
@@ -46,8 +51,12 @@ function App() {
          <Route path ='/bookingsuccess' element={<Bookingsuccess />} />
          <Route path = '/login' element = {<LoginPage />} />
          <Route path = '/signup' element = {<Signup_page />} />
+         <Route path='/checkin' element={<Info.Provider value={{allInf,setAllInf}}><CheckInForm/></Info.Provider>} />
+         <Route path='/CheckInDetails' element={<Info.Provider value={{allInf,setAllInf}}><CheckInDetails/></Info.Provider>} />
+         <Route path='/Itinerary' element={<Info.Provider value={{allInf,setAllInf}}><Itinerary/></Info.Provider>} />
+         <Route path='/Confirmation' element={<Info.Provider value={{allInf,setAllInf}}><Confirmation/></Info.Provider>} />
      </Routes>
-     
+
     </BrowserRouter>
   );
 }
