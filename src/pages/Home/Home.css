@@ -1,14 +1,16 @@
 
  .greetings {
     position: absolute;
-    right: 10%;
-    top: 60%;
+    right: 45%;
+    top: 20%;
     text-align: right;
     max-width: 300px;
+    font-family: serif;
+    font-size: larger;
 }
 .book-btn{
     
-    background: #333;
+    background: orange;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -16,8 +18,10 @@
     color: #fff;
     border-radius: 5px;
     transition: background 0.3s ease;
+    margin-right: 20%;
 
 }
-.ho{
-    background-image: url('https://w0.peakpx.com/wallpaper/523/823/HD-wallpaper-airplane-ultra-motors-airplane-airport-taking-off.jpg');
+.welocomelogo{
+    height: 350px;
+    border-radius: 50%;
 }

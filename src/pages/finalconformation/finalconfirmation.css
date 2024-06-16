@@ -1,8 +1,4 @@
-.body {
-    background-color: #f5f5f5;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
+
   
   .title {
     text-align: center;
@@ -55,11 +51,12 @@
   
   .traveller-details {
     margin-left: 25%;
-    background-color: white;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
     width: 50%;
     padding: 10px;
     margin-top: 3%;
-    border-radius: 10px;
+    border-radius: 20px;
     color: black;
   }
   

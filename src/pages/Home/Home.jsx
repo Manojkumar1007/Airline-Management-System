@@ -14,7 +14,8 @@ const Home = () =>{
     return(
      <div className="ho">
          <div className="greetings">
-             <h2>Travel World with Us</h2>
+         <img className="welocomelogo" src="https://cdn5.vectorstock.com/i/1000x1000/21/39/sign-welcomeview-from-window-airplane-vector-8002139.jpg" alt="welcome-img" />
+             <h1>Travel World with Us...</h1>
              <p>Fly the friendly skies!<br/>Low fares,on time flights</p>
              <button className="book-btn" onClick={handleClick}>BOOk</button>
            </div>
