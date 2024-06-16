@@ -23,7 +23,7 @@ function Flightcard(props) {
       destinationCity: props.destinationCity,
       travelDate: props.travelDate,
     }
-    navigate('/priceconformationpage', {state: flightDetails})
+    navigate('/priceconfirmationpage', {state: flightDetails})
   };
 
   function displayLayovers(layovers){

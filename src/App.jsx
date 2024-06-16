@@ -39,7 +39,7 @@ function App() {
          <Route path='/' element = {<Info.Provider value={{allInf,setAllInf}}><Home/></Info.Provider>} />
          <Route path='/searchflights' element={<Info.Provider value={{allInf,setAllInf}}><Searchflights/></Info.Provider>} />
          <Route path = '/flightdisplay' element={<Info.Provider value={{allInf,setAllInf}}><Flightsdisplay /></Info.Provider>} />
-         <Route path = '/priceconformationpage' element={<Info.Provider value={{allInf,setAllInf}}><Priceconfirmationpage /></Info.Provider>} /> 
+         <Route path = '/priceconfirmationpage' element={<Info.Provider value={{allInf,setAllInf}}><Priceconfirmationpage /></Info.Provider>} /> 
          <Route path='/selecttraveller' element={<Info.Provider value={{allInf,setAllInf}}><Selecttravaeller /></Info.Provider>} />
          <Route path='/seatselection' element ={<Info.Provider value={{allInf,setAllInf}}><Seatselection /></Info.Provider>} />
          <Route path='/finalconfirmation' element={<Info.Provider value={{allInf,setAllInf}}><Finalconfirmation /></Info.Provider>} />
