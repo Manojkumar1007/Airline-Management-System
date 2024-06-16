@@ -1,7 +1,16 @@
 import React from "react";
 import "./Navbar.css";
 import {NavLink} from "react-router-dom";
+import { useAuthContext } from "../../auth/useAuthContext";
+import { useLogout } from "../../Helper/useLogout";
 const Navbar = () => {
+
+    const {isAuthenticated} = useAuthContext();
+    const {logout} = useLogout();
+    const handleLogout = () => {
+        logout();
+    }
+
     return(
         <div className="navbar">
             <div className="airlines">
@@ -9,9 +18,10 @@ const Navbar = () => {
             </div>
             <div className="paths">
                 <ul>
-                    <NavLink to = '/'><li>Home</li></NavLink>
-                    <NavLink to = '/'><li>Check-in</li></NavLink>
-                    <NavLink to = './login'><li>Log-in</li></NavLink>
+                    <NavLink to = '/' className="nav-link"><li>Home</li></NavLink>
+                    <NavLink to = '/checkin' className="nav-link"><li>Check-in</li></NavLink>
+                    {isAuthenticated ? <NavLink to = './login' onClick={handleLogout} className="nav-link"><li>Logout</li></NavLink> : <NavLink to = './login' className="nav-link"><li>Log-in</li></NavLink> }
+                    
                 </ul>
                 
             </div>

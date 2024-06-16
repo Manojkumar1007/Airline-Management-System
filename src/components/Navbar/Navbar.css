@@ -15,6 +15,10 @@ html, body {
   padding: 10px;
 }
 
+.paths .nav-link{
+  text-decoration: ;
+}
+
 .paths {
   text-align: right;
   align-items: flex-end;
