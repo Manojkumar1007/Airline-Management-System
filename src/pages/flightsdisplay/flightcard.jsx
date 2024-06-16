@@ -25,7 +25,7 @@ function Flightcard(props) {
          </h4>
         </div>
         <div className="col1">
-          <img className="img" src={props.img} alt="flightimg" />
+          <img className="img" src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" />
         </div>
         <div className="col2">
           <p className="location">
