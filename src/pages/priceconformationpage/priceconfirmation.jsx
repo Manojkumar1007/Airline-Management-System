@@ -1,21 +1,23 @@
-import React,{useState}from "react";
+import {useContext} from "react";
 import "./priceconfirmation.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FlightContext } from "../../Helper/FlightContext";
 //import { useContext } from "react";
 //import { Info } from "../../Helper/helper";
 function Priceconfirmationpage(){
-   const location = useLocation();
+   
    const navigate = useNavigate();
-   const flightDetails = location.state;
+   const {flightDetails} = useContext(FlightContext);
 
    function displayLayovers(layovers){
       return layovers === 0 ? "Non-Stop" : `${layovers} Layovers`;
     }
-   const [price,setPrice] = useState(false);
 
-   if(price){
-      return navigate('/selecttraveller')
+   function handleClick(e){
+      e.preventDefault();
+      navigate('/selecttraveller');
    }
+
     return(
         <div className="back">
            <div><h1 className="title">Review & Traveller Details</h1></div>
@@ -26,9 +28,7 @@ function Priceconfirmationpage(){
                   </p>
               </div>
              <div>
-                  <p><span><img className="img" src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" /></span> 
-                     {flightDetails.companyName} | {flightDetails.flightNumber}
-                  </p>
+                  <p><span><img className="img" src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" /></span> {flightDetails.companyName} | {flightDetails.flightNumber} </p>
                 </div>
              <div className="flight-details">
                  <div className="section1">
@@ -77,7 +77,7 @@ function Priceconfirmationpage(){
                    <div className="fare-description">Total Amount</div>
                    <div className="fare-amount">{flightDetails.pricePerSeat}</div>
               </div>
-              <div className="fare-amount"><button className="continue-button" id="continueButton" onClick={() => setPrice(true)}>Continue</button></div>
+              <div className="fare-amount"><button className="continue-button" id="continueButton" onClick={handleClick}>Continue</button></div>
            </div>
         </div>
     );

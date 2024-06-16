@@ -2,38 +2,49 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { Info } from "../../Helper/helper";
+// import { Info } from "../../Helper/helper";
 import './finalconfirmation.css';
+import { FlightContext } from "../../Helper/FlightContext";
 const Finalconfirmation = () =>{
-  const {allInf,setAllInf} = useContext(Info);
+    //const { allInf,setAllInf } = useContext(Info);
+    const {flightDetails, traveller, selectedSeat} = useContext(FlightContext)
     const navigate = useNavigate()
     const [done,setDone] = useState(false);
     if(done){
         return navigate('/bookingsuccess')
     }
+
+    // if(!flightDetails || !traveller || !selectedSeat){
+    //   return <div>Loading....</div>
+    // }
+
+    const displayLayovers = (layovers) => {
+      return layovers === 0 ? "Non-Stop" : `${layovers} Layovers`;
+  };
+
     return(
         <div className="body">
              <div><h1 className="title">Booking Details</h1></div>
               <div className="flight-info">
                  <div>
-                     <p className="locations">{allInf.from}<span> → </span>{allInf.to}<br/><span class="info">{allInf.travellingdate}, {allInf.layovers},{allInf.duration}Economy</span></p>
+                     <p className="locations">{flightDetails.startingCity}<span> → </span>{flightDetails.destinationCity}<br/><span className="info">{flightDetails.travelDate}, {displayLayovers(flightDetails.layovers)},{flightDetails.duration}Economy</span></p>
                    </div>
                   <div>
-                    <p><span><img className="img" src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" /></span> {allInf.flightname} | {allInf.flightnum}</p>
+                    <p><span><img className="img" src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" /></span> {flightDetails.companyName} | {flightDetails.flightNumber}</p>
                   </div>
                  <div className="flight-details">
                       <div className="section1">
-                          <h3>{allInf.travellingdate}</h3>
-                          <p><strong>{allInf.starttime}</strong> {allInf.from}</p>
+                          <h3>{flightDetails.travelDate}</h3>
+                          <p><strong>{flightDetails.startTime}</strong> {flightDetails.startingCity}</p>
                           <p>Indira Gandhi Intl Airport</p>
                           <p>Terminal 3</p>
                        </div>
                        <div className="duration">
-                          <p><span>{allInf.duration}</span><hr/>{allInf.layovers}</p>
+                          <p><span>{flightDetails.duration}</span><hr/>{displayLayovers(flightDetails.layovers)}</p>
                         </div>
                        <div className="section2">
-                           <h3>{allInf.travellingdate}</h3>
-                           <p><strong>{allInf.endtime}</strong> {allInf.to}</p>
+                           <h3>{flightDetails.travelDate}</h3>
+                           <p><strong>{flightDetails.endTime}</strong> {flightDetails.destinationCity}</p>
                            <p>Chatrapati Shivaji International Airport</p>
                            <p>Terminal 2</p>
                         </div>
@@ -53,7 +64,7 @@ const Finalconfirmation = () =>{
                 </div >
                <div className="traveller-details">
                     <h3>Traveller Details</h3>
-                    <p>Name: {allInf.firstname} {allInf.lastname}<br/>Email: {allInf.email}<br />Seat: {allInf.seat}</p>
+                    <p>Name: {traveller.firstName} {traveller.lastName}<br/>Email: {traveller.email}<br />Seat: {selectedSeat}</p>
                </div>
               <div><button className="confirm-button" id="conformButton"  onClick={() => setDone(true)}>Confirm</button></div>
         </div>

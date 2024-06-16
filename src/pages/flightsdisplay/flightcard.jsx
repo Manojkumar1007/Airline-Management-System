@@ -1,7 +1,8 @@
-import React,{useState} from "react";
+import {useContext} from "react";
 import propTypes from 'prop-types';
 import "./flightdisplay.css";
 import { useNavigate } from "react-router-dom";
+import { FlightContext } from "../../Helper/FlightContext";
 //import { useContext } from "react";
 //import details from "./flightdetails";
 //import { Info } from "../../Helper/helper"
@@ -9,21 +10,23 @@ function Flightcard(props) {
   // const {allInf,setAllInf} = useContext(Info);
   
   const navigate = useNavigate()
+  const { flightDetails, setFlightDetails } = useContext(FlightContext);
   const handleBookClick = () => {
-    const flightDetails = {
-      id: props.id,
-      companyName: props.companyName,
-      flightNumber: props.flightNumber,
-      startTime: props.startTime,
-      duration: props.duration,
-      layovers: props.layovers,
-      endTime: props.endTime,
-      pricePerSeat: props.pricePerSeat,
-      startingCity: props.startingCity,
-      destinationCity: props.destinationCity,
-      travelDate: props.travelDate,
-    }
-    navigate('/priceconfirmationpage', {state: flightDetails})
+    // const flightDetails = {
+    //   id: props.id,
+    //   companyName: props.companyName,
+    //   flightNumber: props.flightNumber,
+    //   startTime: props.startTime,
+    //   duration: props.duration,
+    //   layovers: props.layovers,
+    //   endTime: props.endTime,
+    //   pricePerSeat: props.pricePerSeat,
+    //   startingCity: props.startingCity,
+    //   destinationCity: props.destinationCity,
+    //   travelDate: props.travelDate,
+    // }
+    setFlightDetails({...props});
+    navigate('/priceconfirmationpage');
   };
 
   function displayLayovers(layovers){
