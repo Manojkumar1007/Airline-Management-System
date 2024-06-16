@@ -10,6 +10,7 @@ const Navbar = () => {
             <div className="paths">
                 <ul>
                     <NavLink to = '/'><li>Home</li></NavLink>
+                    <NavLink to = '/'><li>Check-in</li></NavLink>
                     <NavLink to = './login'><li>Log-in</li></NavLink>
                 </ul>
                 

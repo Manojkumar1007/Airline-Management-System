@@ -73,7 +73,6 @@ function Flightcard(props) {
           <button className="btn" onClick={() => handleBookClick() }>Book</button>
         </div>
       </div>
-      <hr />
     </div>
   );
 }
