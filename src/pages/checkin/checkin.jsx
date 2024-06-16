@@ -1,6 +1,5 @@
 import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './checkin.css';
 import { Info } from '../../Helper/helper';
 
 

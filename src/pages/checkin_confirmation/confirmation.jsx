@@ -1,7 +1,6 @@
 
 import React, {useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
-import './confirmation.css';
 import { Info } from '../../Helper/helper';
 
 function Confirmation() {

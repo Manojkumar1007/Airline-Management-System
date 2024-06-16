@@ -1,9 +1,7 @@
 
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './itinerary.css';
 import { Info } from '../../Helper/helper';
-import { useContext } from 'react';
 
 function Itinerary() {
   const navigate = useNavigate();

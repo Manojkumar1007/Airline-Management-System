@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './checkin_details.css';
 import { Info } from '../../Helper/helper';
 import { useContext } from 'react';
 const CheckInDetails = () => {
