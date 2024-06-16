@@ -1,27 +1,42 @@
 import React,{useState} from "react";
+import propTypes from 'prop-types';
 import "./flightdisplay.css";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import details from "./flightdetails";
-import { Info } from "../../Helper/helper"
+//import { useContext } from "react";
+//import details from "./flightdetails";
+//import { Info } from "../../Helper/helper"
 function Flightcard(props) {
-  const {allInf,setAllInf} = useContext(Info);
+  // const {allInf,setAllInf} = useContext(Info);
+  
   const navigate = useNavigate()
-  const [god,setGod] = useState(false);
-  const handleBookClick = (id) => {
-    setAllInf(( ) => ({ ...allInf,duration: details[id-1].duration,bookid: id,starttime:details[id-1].starttime,layovers:details[id-1].layovers,endtime:details[id-1].endtime,price:details[id-1].price,flightname:details[id-1].flightname,flightnum:details[id-1].flightnum}));
-    setGod(true);
+  const handleBookClick = () => {
+    const flightDetails = {
+      id: props.id,
+      companyName: props.companyName,
+      flightNumber: props.flightNumber,
+      startTime: props.startTime,
+      duration: props.duration,
+      layovers: props.layovers,
+      endTime: props.endTime,
+      pricePerSeat: props.pricePerSeat,
+      startingCity: props.startingCity,
+      destinationCity: props.destinationCity,
+      travelDate: props.travelDate,
+    }
+    navigate('/priceconformationpage', {state: flightDetails})
   };
-  if(god){
-    return navigate('/priceconformationpage')
+
+  function displayLayovers(layovers){
+    return layovers === 0 ? "Non-Stop" : `${layovers} Layovers`;
   }
+  
   return (
     <div className="card">
       <div className="con">
         <div className="col0">
            <h4 className="air">
-           {props.flightname}<br />
-           <span className="flightnum">{props.flightnum}</span>
+           {props.companyName}<br />
+           <span className="flightnum">{props.flightNumber}</span>
          </h4>
         </div>
         <div className="col1">
@@ -29,35 +44,49 @@ function Flightcard(props) {
         </div>
         <div className="col2">
           <p className="location">
-            {props.starttime}
+            {props.startTime}
             <br />
-            <span className="city">{allInf.from}</span>
+            <span className="city">{props.startingCity}</span>
           </p>
         </div>
         <div className="col3">
           <p className="time">
             {props.duration}
             <hr />
-            <span>{props.layovers}</span>
+            <span>{displayLayovers(props.layovers)}</span>
           </p>
         </div>
         <div className="col4">
           <p className="location">
-            {props.endtime}
+            {props.endTime}
             <br />
-            <span className="city">{allInf.to}</span>
+            <span className="city">{props.destinationCity}</span>
           </p>
         </div>
         <div className="col5">
-          <p className="price">{props.price}</p>
+          <p className="price">{props.pricePerSeat}</p>
         </div>
         <div className="col6">
-          <button className="btn" onClick={() => handleBookClick(props.id) }>Book</button>
+          <button className="btn" onClick={() => handleBookClick() }>Book</button>
         </div>
       </div>
       <hr />
     </div>
   );
 }
+
+Flightcard.propTypes = {
+  id: propTypes.string.isRequired,
+  companyName: propTypes.string.isRequired,
+  flightNumber: propTypes.string.isRequired,
+  startTime: propTypes.string.isRequired,
+  duration: propTypes.string.isRequired,
+  layovers: propTypes.number.isRequired,
+  endTime: propTypes.string.isRequired,
+  pricePerSeat: propTypes.string.isRequired,
+  startingCity: propTypes.string.isRequired,
+  destinationCity: propTypes.string.isRequired,
+  travelDate: propTypes.string.isRequired,
+};
 
 export default Flightcard;

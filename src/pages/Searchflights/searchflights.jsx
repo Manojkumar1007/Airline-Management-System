@@ -1,14 +1,17 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './searchflights.css';
-import { Info } from "../../Helper/helper";
+//import { Info } from "../../Helper/helper";
 
 const Searchflights = () => {
-  const { allInf, setAllInf } = useContext(Info);
-  const { startingCity, destinationCity, traveldate } = allInf;
+  const [ searchInf, setSearchInf ] = useState({
+    startingCity: '',
+    destinationCity: '',
+    travelDate: '',
+  });
 
-  const changeHandler = e => {
-    setAllInf({ ...allInf, [e.target.name]: e.target.value });
+  const handleChange = e => {
+    setSearchInf({ ...searchInf, [e.target.name]: e.target.value });
   }
 
   const navigate = useNavigate();
@@ -22,9 +25,9 @@ const Searchflights = () => {
   //   }
   // }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    navigate('/flightdisplay', {state: {startingCity,destinationCity,traveldate}});
+    navigate('/flightdisplay', {state: searchInf});
   };
 
   return (
@@ -36,7 +39,7 @@ const Searchflights = () => {
           <form onSubmit={handleSubmit}>
             <div className='form-grp'>
               <label>From:🛫</label><br />
-              <select name='from' value={startingCity} onChange={changeHandler} required>
+              <select name='startingCity' value={searchInf.startingCity} onChange={handleChange} required>
                 <option value='' disabled>Select departure city</option>
                 <option value='Bangalore'>Bangalore</option>
                 <option value='Mumbai'>Mumbai</option>
@@ -48,7 +51,7 @@ const Searchflights = () => {
             </div>
             <div className='to-grp'>
               <label>To:🛬</label><br />
-              <select name='to' value={destinationCity} onChange={changeHandler} required>
+              <select name='destinationCity' value={searchInf.destinationCity} onChange={handleChange} required>
                 <option value='' disabled>Select destination city</option>
                 <option value='Guwahati'>Guwahati</option>
                 <option value='Kolkata'>Kolkata</option>
@@ -60,7 +63,7 @@ const Searchflights = () => {
             </div>
             <div className='date-grp'>
               <label>Departure Date</label><br />
-              <input type='date' name='travellingdate' value={traveldate} onChange={changeHandler} required/>
+              <input type='date' name='travelDate' value={searchInf.travelDate} onChange={handleChange} required/>
             </div>
             <div>
               {/* <button type='button' className='search-btn' onClick={() => setSearch(true)}>Search Flights🔍</button><br /> */}
