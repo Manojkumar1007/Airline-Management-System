@@ -1,0 +1,81 @@
+.content-checkin {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    background-color:#eb5e3b;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    margin-top :90px;
+    margin-bottom: 20px;
+    color: #f14c14;
+  }
+  
+  .description-checkin {
+    margin-top :50px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .description-checkin p {
+    margin: 10px 0;
+  }
+  
+  .description-checkin a {
+    color: #ffdd00;
+    text-decoration: none;
+  }
+  
+  .description-checkin a:hover {
+    text-decoration: underline;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group-checkin {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #f14c14;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top:20px;
+  }
+  
+  button:hover {
+    background-color: #ffcc00;
+  }
+  
+  .checkin-result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border-radius: 4px;
+  }
+  
