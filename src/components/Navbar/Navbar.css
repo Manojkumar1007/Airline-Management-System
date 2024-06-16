@@ -1,25 +1,4 @@
-/* .airlines{
-   padding: 10px;
-}
-.paths li{
-  display: inline;
-  padding: 10px;
 
-}
-.paths{
-    text-align: right;
-    align-items: flex-end;
-}
-.navbar{
-  margin: 0%;
-  position: absolute;
-   display: flex;
-   padding: 5px;
-   justify-content: space-between;
-   background-color: orange;
-   width: 100vw;
-   height: 30px;
-} */
 html, body {
   margin: 0;
   padding: 0;
@@ -42,14 +21,14 @@ html, body {
 }
 
 .navbar {
-  position: fixed; /* Change to fixed */
-  top: 0; /* Ensure it is positioned at the top */
-  left: 0; /* Ensure it spans from the left edge */
-  right: 0; /* Ensure it spans to the right edge */
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
   margin: 0;
   display: flex;
   padding: 5px;
   justify-content: space-between;
-  background-color: orange;
   z-index: 1000; /* Ensure it appears above other elements */
+  color: white;
 }

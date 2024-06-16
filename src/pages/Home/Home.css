@@ -22,6 +22,32 @@
 
 }
 .welocomelogo{
-    height: 350px;
+    height: 250px;
     border-radius: 50%;
 }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://wallsdesk.com/wp-content/uploads/2018/04/Plane-HD-pics.jpg') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 60%; 
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: #333; 
+}
+

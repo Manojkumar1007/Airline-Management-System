@@ -28,7 +28,8 @@
 }
 .col3 {
   width: 15%;
-  margin-right: 5%;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
   height: 75px;
 }
 .col4 {
@@ -46,6 +47,8 @@
   position: relative;
   height: 125px;
   background-color: white;
+  width: 80%;
+  margin-left: 10%;
 }
 .location {
   font-size: 20px;
