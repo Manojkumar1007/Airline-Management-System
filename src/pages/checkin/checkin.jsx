@@ -1,17 +1,14 @@
-import React, { useState,useContext } from 'react';
+import React, { useContext, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Info } from '../../Helper/helper';
-
+import { FlightContext } from '../../Helper/FlightContext';
 
 const CheckInForm = () => {
   const navigate = useNavigate();
-  const {allInf ,setAllInf} = useContext(Info);
-  const [bookingId, setBookingId] = useState('');
-  const [lastName, setLastName] = useState('');
+  const {pnr, setPnr} = useContext(FlightContext);
+  const {lastName, setLastName} = useContext(FlightContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setAllInf({ ...allInf,bookid: bookingId, lastname: lastName });
     navigate('/CheckInDetails');
   };
 
@@ -23,8 +20,8 @@ const CheckInForm = () => {
         <input
           type="text"
           id="bookingId"
-          value={bookingId}
-          onChange={(e) => setBookingId(e.target.value)}
+          value={pnr}
+          onChange={(e) => setPnr(e.target.value)}
           required
         />
         <label htmlFor="lastName">Last Name:</label>

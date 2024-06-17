@@ -1,13 +1,69 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Info } from '../../Helper/helper';
-import { useContext } from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FlightContext } from "../../Helper/FlightContext";
+// import { Info } from '../../Helper/helper';
+// import { useContext } from 'react';
 const CheckInDetails = () => {
   const navigate = useNavigate();
-  const {allInf} = useContext(Info);
+  // const {allInf} = useContext(Info);
+  // const {state} = useLocation();
+  const { pnr, lastName, flightInfo, setFlightInfo } = useContext(FlightContext);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchFlightInfo = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/checkin-details', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pnr: pnr, lastName: lastName }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Error response:', errorData);
+          throw new Error(errorData.message || 'Error fetching flight details');
+        }
+
+        const data = await response.json();
+
+        const travelDate = new Date(data.flightId.travelDate).toLocaleDateString();
+
+        console.log(data);
+        setFlightInfo({...data, flightId:{...data.flightId, travelDate}});
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFlightInfo();
+  }, [pnr, lastName]);
+
   const handleContinue = () => {
-    navigate('/Itinerary');
+    navigate("/Itinerary");
   };
+
+  const displayLayovers = (layovers) => {
+    return layovers === 0 ? "Non-Stop" : `${layovers} Layovers`;
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!flightInfo) {
+    return <div>No flight details found</div>;
+  }
+
 
   return (
     <div className="container-Details">
@@ -15,7 +71,10 @@ const CheckInDetails = () => {
         <div className="navbar-Details">
           <div className="right-section">
             <div className="user-login">
-              <p>Welcome, {allInf.firstname} {allInf.lastname}</p>
+              <p>
+                Welcome, {flightInfo.traveller?.firstName}{" "}
+                {flightInfo.traveller?.lastName}
+              </p>
             </div>
           </div>
         </div>
@@ -26,37 +85,43 @@ const CheckInDetails = () => {
             <div className="flight-route">
               <span className="info-label">Flight-Details: </span>
               <br />
-              <span className="airport-code">{allInf.flightname}</span>
-              <span className="airport-code">{allInf.flightnum}</span>
+              <span className="airport-code">
+                {flightInfo.flightId?.companyName}
+              </span>
+              <span className="airport-code">
+                {flightInfo.flightId?.flightNumber}
+              </span>
             </div>
             <div className="flight-destination">
-              <span>{allInf.from}</span>
-              <span>  --  </span>
-              <span>{allInf.to}</span>
+              <span>{flightInfo.flightId?.startingCity}</span>
+              <span> -- </span>
+              <span>{flightInfo.flightId?.destinationCity}</span>
             </div>
           </div>
           <br />
           <div className="flight-date">
             <div className="flight-date-item">
               <span className="info-label">Date: </span>
-              <span>{allInf.travellingdate}</span>
+              <span>{flightInfo.flightId?.travelDate}</span>
             </div>
           </div>
           <br />
           <div className="passenger-info">
             <div className="passenger-info-item">
               <span className="info-label">layovers: </span>
-              <span>{allInf.layovers}</span>
+              <span>{displayLayovers(flightInfo.flightId?.layovers)}</span>
             </div>
           </div>
         </div>
         <div className="check-in-form">
-          <label htmlFor="nameInput" className="info-label">Name:</label>
+          <label htmlFor="nameInput" className="info-label">
+            Name:
+          </label>
           <input
             type="text"
             id="nameInput"
             placeholder="Enter your name"
-            value={`${allInf.firstname} ${allInf.lastname}`}
+            value={`${flightInfo.traveller?.firstName} ${flightInfo.traveller.lastName}`}
             readOnly
           />
           <button onClick={handleContinue}>CONTINUE</button>

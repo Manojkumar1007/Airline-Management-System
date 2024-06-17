@@ -12,7 +12,31 @@ const currentBookingSchema = new Schema({
     bookingTime: {
         type: Date,
         default: Date.now(),
+    },
+    traveller: {
+            firstName: {
+                type: String,
+                required: true,
+            },
+            lastName: {
+                type: String,
+                required: true,
+            },
+            dateOfBirth: {
+                type: String,
+                required: true,
+            },
+            email: {
+                type: String,
+                required: true,
+            }
+    },
+    pnr: {
+        type: String,
+        required: true,
+        unique: true,
     }
+    
 });
 
 const CurrentBooking = mongoose.model("CurrentBooking", currentBookingSchema);

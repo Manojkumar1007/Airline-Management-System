@@ -1,18 +1,25 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Info } from '../../Helper/helper';
+import { FlightContext } from '../../Helper/FlightContext';
 
 function Itinerary() {
   const navigate = useNavigate();
-  const { allInf,setAllInf } = useContext(Info);
+  // const { allInf,setAllInf } = useContext(Info);
+  const {flightInfo, selectedSeat} = useContext(FlightContext);
   const [baggage, setBaggage] = useState('none');
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setBaggage(...baggage,  e.target.value)
+  }
+
   const handleSelectSeat = () => {
     navigate('/seatselection');
   };
 
   const handleContinue = () => {
-    setAllInf({ ...allInf, baggage });
     navigate('/Confirmation');
   };
 
@@ -28,12 +35,12 @@ function Itinerary() {
           <div className="itinerary">
             <h2>View Your Itinerary</h2>
             <div className="itineraryDetails">
-              <div className="detail">{allInf.from} to {allInf.to}</div>
+              <div className="detail">{flightInfo.flightId.startingCity} to {flightInfo.flightId.destinationCity}</div>
               <div className="detail">
-                <span>{allInf.starttime}</span> <span>{allInf.endtime}</span> <span>{allInf.flightnum}</span>
+                <span>{flightInfo.flightId.startTime}</span> <span>{flightInfo.flightId.endTime}</span> <span>{flightInfo.flightId.flightNumber}</span>
               </div>
-              <div className="detail">{allInf.lastname}</div>
-              <div className="detail">Seat: {allInf.seat || 'Unassigned'}</div>
+              <div className="detail">{flightInfo.flightId.lastname}</div>
+              <div className="detail">Seat: {selectedSeat || 'Unassigned'}</div>
             </div>
             <div className="formGroup">
               <label htmlFor="baggage">Additional Baggage:</label>
@@ -41,7 +48,7 @@ function Itinerary() {
                 id="baggage"
                 name="baggage"
                 value={baggage}
-                onChange={(e) => (e.target.value)}
+                onChange={handleChange}
               >
                 <option value="none">None</option>
                 <option value="<10kg">10 kgs</option>

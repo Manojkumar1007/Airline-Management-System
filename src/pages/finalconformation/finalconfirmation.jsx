@@ -9,18 +9,36 @@ const Finalconfirmation = () =>{
     //const { allInf,setAllInf } = useContext(Info);
     const {flightDetails, traveller, selectedSeat} = useContext(FlightContext)
     const navigate = useNavigate()
-    const [done,setDone] = useState(false);
-    if(done){
-        return navigate('/bookingsuccess')
-    }
-
-    // if(!flightDetails || !traveller || !selectedSeat){
-    //   return <div>Loading....</div>
+    // const [done,setDone] = useState(false);
+    // if(done){
+    //     return navigate('/bookingsuccess')
     // }
+
+    const handleClick = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/book-flight', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ flightId: flightDetails.id, traveller: traveller }), // Include the flightId in the body of the request
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to book the flight');
+        }
+  
+        const data = await response.json();
+        alert('Flight booked successfully: ' + data.booking.traveller.firstName);
+      } catch (error) {
+        alert('Error booking flight: ' + error.message);
+      }
+      navigate('/bookingsuccess')
+    }
 
     const displayLayovers = (layovers) => {
       return layovers === 0 ? "Non-Stop" : `${layovers} Layovers`;
-  };
+    };
 
     return(
         <div className="body">
@@ -66,7 +84,7 @@ const Finalconfirmation = () =>{
                     <h3>Traveller Details</h3>
                     <p>Name: {traveller.firstName} {traveller.lastName}<br/>Email: {traveller.email}<br />Seat: {selectedSeat}</p>
                </div>
-              <div><button className="confirm-button" id="conformButton"  onClick={() => setDone(true)}>Confirm</button></div>
+              <div><button className="confirm-button" id="conformButton"  onClick={handleClick}>Confirm</button></div>
         </div>
         
     )

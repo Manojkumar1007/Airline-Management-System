@@ -7,9 +7,12 @@ export const FlightProvider = ({ children }) => {
   const [flightDetails, setFlightDetails] = useState(null);
   const [traveller, setTraveller] = useState(null);
   const [selectedSeat, setSelectedSeat] = useState(null);
+  const [pnr, setPnr] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [flightInfo, setFlightInfo] = useState(null);
 
   return (
-    <FlightContext.Provider value={{ flightDetails, setFlightDetails, traveller, setTraveller, selectedSeat, setSelectedSeat }}>
+    <FlightContext.Provider value={{ flightDetails, setFlightDetails, traveller, setTraveller, selectedSeat, setSelectedSeat, pnr, setPnr, lastName, setLastName, flightInfo, setFlightInfo }}>
       {children}
     </FlightContext.Provider>
   );
