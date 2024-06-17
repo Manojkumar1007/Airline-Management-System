@@ -9,13 +9,13 @@ const Home = () =>{
     const navigate = useNavigate()
     const {isAuthenticated} = useAuthContext();
     const handleClick=() =>{
-        if(isAuthenticated){
-            navigate("/searchflights");
-        }else{
-            alert('Login to continue booking seemlessly');
-            navigate("/login");
-        }
-        
+        // if(isAuthenticated){
+        //     navigate("/searchflights");
+        // }else{
+        //     alert('Login to continue booking seemlessly');
+        //     navigate("/login");
+        // }
+        navigate('/searchflights');
     };
     return(
      <div className="ho">
