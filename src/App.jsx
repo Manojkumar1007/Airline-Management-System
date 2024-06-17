@@ -17,6 +17,15 @@ import Itinerary from './pages/Itinerary/itinerary.jsx';
 import Confirmation from './pages/checkin_confirmation/confirmation.jsx';
 import { Info } from './Helper/helper.jsx';
 import { useState } from 'react';
+import React from 'react';
+import { ProfileProvider } from './Helper/ProfileContext';
+import Profile from './pages/profile/profile.jsx';
+import ProfileEdit from './pages/profile_edit/profile_edit.jsx';
+import BookingsPage from './pages/currentbookings/bookings.jsx';
+import PreferencesPage from './pages/preferences/preference.jsx';
+import NotificationsPage from './pages/Notification/notification.jsx';
+
+
 function App() {
   const [allInf,setAllInf] = useState({
     from : '',
@@ -55,6 +64,12 @@ function App() {
          <Route path='/CheckInDetails' element={<Info.Provider value={{allInf,setAllInf}}><CheckInDetails/></Info.Provider>} />
          <Route path='/Itinerary' element={<Info.Provider value={{allInf,setAllInf}}><Itinerary/></Info.Provider>} />
          <Route path='/Confirmation' element={<Info.Provider value={{allInf,setAllInf}}><Confirmation/></Info.Provider>} />
+         <Route path="/" element={<Profile />} />
+          <Route path="/Profile" element={<ProfileProvider><Profile /></ProfileProvider>} />
+          <Route path="/ProfileEdit" element={<ProfileProvider><ProfileEdit /></ProfileProvider>} />
+          <Route path="/BookingsPage" element={<BookingsPage />} />
+          <Route path="/PreferencesPage" element={<PreferencesPage />} />
+          <Route path="/NotificationsPage" element={<NotificationsPage />} />
      </Routes>
 
     </BrowserRouter>
@@ -62,3 +77,4 @@ function App() {
 }
 
 export default App;
+
