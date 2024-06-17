@@ -19,6 +19,7 @@ const Navbar = () => {
             <div className="paths">
                 <ul>
                     <NavLink to = '/' className="nav-link"><li>Home</li></NavLink>
+                    <NavLink to = '/profile' className= "nav-link"><li>profile</li></NavLink>
                     <NavLink to = '/checkin' className="nav-link"><li>Check-in</li></NavLink>
                     {isAuthenticated ? <NavLink to = './login' onClick={handleLogout} className="nav-link"><li>Logout</li></NavLink> : <NavLink to = './login' className="nav-link"><li>Log-in</li></NavLink> }
                     
