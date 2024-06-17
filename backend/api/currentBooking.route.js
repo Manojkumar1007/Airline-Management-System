@@ -27,7 +27,7 @@ router.get("/current-bookings", async (req,res) => {
 
 //create new booking
 router.post("/book-flight", async (req,res) => {
-    const { flightId, traveller } = req.body;
+    const { flightId, traveller, selectedSeat } = req.body;
     try {
         
         //Find the flight by its Id
@@ -45,6 +45,7 @@ router.post("/book-flight", async (req,res) => {
                 bookingTime: new Date(),
                 traveller: traveller,
                 pnr: pnr,
+                selectedSeat: selectedSeat,
             });
 
             // Save the booking 

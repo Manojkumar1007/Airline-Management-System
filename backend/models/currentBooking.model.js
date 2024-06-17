@@ -31,6 +31,10 @@ const currentBookingSchema = new Schema({
                 required: true,
             }
     },
+    selectedSeat: {
+        type: String,
+        required: true,
+    },
     pnr: {
         type: String,
         required: true,

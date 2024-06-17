@@ -1,14 +1,22 @@
 import React from "react";
 import "./Navbar.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../auth/useAuthContext";
 import { useLogout } from "../../Helper/useLogout";
 const Navbar = () => {
 
     const {isAuthenticated} = useAuthContext();
     const {logout} = useLogout();
+    const navigate = useNavigate();
     const handleLogout = () => {
         logout();
+    }
+    const handleCheckInClick = (e) => {
+        if(!isAuthenticated){
+            e.preventDefault();
+            alert('Login to your account for Web Check-in');
+            navigate('/login');
+        }
     }
 
     return(
@@ -19,7 +27,7 @@ const Navbar = () => {
             <div className="paths">
                 <ul>
                     <NavLink to = '/' className="nav-link"><li>Home</li></NavLink>
-                    <NavLink to = '/checkin' className="nav-link"><li>Check-in</li></NavLink>
+                    <NavLink to = '/checkin' onClick={handleCheckInClick} className="nav-link"><li>Check-in</li></NavLink>
                     {isAuthenticated ? <NavLink to = './login' onClick={handleLogout} className="nav-link"><li>Logout</li></NavLink> : <NavLink to = './login' className="nav-link"><li>Log-in</li></NavLink> }
                     
                 </ul>

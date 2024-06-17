@@ -1,4 +1,4 @@
-import React, { useContext, useState} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FlightContext } from '../../Helper/FlightContext';
 
@@ -6,6 +6,14 @@ const CheckInForm = () => {
   const navigate = useNavigate();
   const {pnr, setPnr} = useContext(FlightContext);
   const {lastName, setLastName} = useContext(FlightContext);
+
+  useEffect(() => {
+
+    const savedPnr = localStorage.getItem('pnr');
+    const savedLastName = localStorage.getItem('lastName');
+    if (savedPnr) setPnr(savedPnr);
+    if(savedLastName) setLastName(savedLastName);
+  },[setPnr,setLastName]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

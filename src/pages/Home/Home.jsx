@@ -3,13 +3,19 @@ import {useNavigate} from 'react-router-dom';
 import Flightcard from "../flightsdisplay/flightcard";
 import flightimg from './image.png';
 import './Home.css';
-import { Info } from "../../Helper/helper";
-import { useContext } from "react";
+import { useAuthContext } from "../../auth/useAuthContext";
 const Home = () =>{
-    const {allInf,setAllInf} = useContext(Info);
+    
     const navigate = useNavigate()
+    const {isAuthenticated} = useAuthContext();
     const handleClick=() =>{
-        navigate("/searchflights");
+        if(isAuthenticated){
+            navigate("/searchflights");
+        }else{
+            alert('Login to continue booking seemlessly');
+            navigate("/login");
+        }
+        
     };
     return(
      <div className="ho">

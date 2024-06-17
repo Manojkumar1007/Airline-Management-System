@@ -21,7 +21,7 @@ const Finalconfirmation = () =>{
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ flightId: flightDetails.id, traveller: traveller }), // Include the flightId in the body of the request
+          body: JSON.stringify({ flightId: flightDetails.id, traveller: traveller, selectedSeat: selectedSeat }), // Include the flightId in the body of the request
         });
   
         if (!response.ok) {
@@ -30,10 +30,11 @@ const Finalconfirmation = () =>{
   
         const data = await response.json();
         alert('Flight booked successfully: ' + data.booking.traveller.firstName);
+        navigate('/bookingsuccess')
       } catch (error) {
         alert('Error booking flight: ' + error.message);
       }
-      navigate('/bookingsuccess')
+      
     }
 
     const displayLayovers = (layovers) => {

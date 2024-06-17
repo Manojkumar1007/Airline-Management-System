@@ -11,6 +11,7 @@ const CheckInDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     const fetchFlightInfo = async () => {
       try {
@@ -42,7 +43,7 @@ const CheckInDetails = () => {
     };
 
     fetchFlightInfo();
-  }, [pnr, lastName]);
+  }, [pnr, lastName, setFlightInfo]);
 
   const handleContinue = () => {
     navigate("/Itinerary");

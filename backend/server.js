@@ -13,6 +13,7 @@ const userRouter = require("./api/user.route");
 const FlightRouter = require("./api/flight.route");
 const AdminRouter = require("./api/admin.route");
 const currentBookingRouter = require("./api/currentBooking.route");
+const emailRouter = require("./api/email.route");
 
 //cron for updating the pastFlights collection
 const cron = require("node-cron");
@@ -27,6 +28,7 @@ app.use("/user", userRouter);
 app.use("/admin", FlightRouter);
 app.use("/admin", AdminRouter);
 app.use(currentBookingRouter);
+app.use(emailRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
