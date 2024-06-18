@@ -37,7 +37,7 @@ const Seatselection = () => {
 
   return (
     <div className="seats">
-      <h1>Flight Seat Booking</h1>
+      <h1 className="seats-title">Flight Seat Booking</h1>
       <div className="seating-chart">
         {Array.from({ length: rows }).map((_, rowIndex) => (
           <div className="seat-row" key={`row-${rowIndex + 1}`}>
