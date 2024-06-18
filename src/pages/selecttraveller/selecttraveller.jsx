@@ -59,7 +59,7 @@ const Selecttravaeller = () => {
             </div>
             <div className="contain">
                 <div id="traveler-info-form">
-                    <div className="form-group gender-options">
+                    {/* <div className="form-group gender-options">
                         <label>
                             <input type="radio" name="title" value="Male" required /> Male
                         </label>
@@ -69,7 +69,7 @@ const Selecttravaeller = () => {
                         <label>
                             <input type="radio" name="title" value="other" required /> other
                         </label>
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <label htmlFor="first-name">First Name</label>
                         <input type="text" name="firstName" value={travellerInfo.firstName} onChange={changeHandle} className="form-control" required />

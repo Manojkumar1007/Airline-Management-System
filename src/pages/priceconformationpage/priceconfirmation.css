@@ -89,10 +89,11 @@
     color: white;
     border: none;
     height: 45px;
-    width: 100px;
+    width: 110px;
     text-decoration: none; /* Fixed from text-decoration: #ddd; */
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
+    border-radius: 5px;
 }
 
 /* Title */
