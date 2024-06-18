@@ -30,27 +30,26 @@
   }
   
   .container-itinerary {
-    width: 100%;
-    width: 1120px;
-    height:490px;
+    width: 200%;
+    max-width: 800px;
     background-color: #fff;
-    padding: 0;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(209, 17, 17, 0.5);
-    overflow: hidden;
+    margin-left:210px;
+    margin-top:15px;
   }
   
   .content-itinerary {
     background-size: cover;
     background-position: center;
-    padding: 40px;
+    box-shadow:  0 0 10px rgba(113, 108, 108, 0.836);
+    padding: 20px;
   }
   
   .itinerary {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height:380px;
   }
   
@@ -103,7 +102,7 @@
     cursor: pointer;
   }
   
-  .continue-itinerary {
+  .continue {
     background-color: #d62d0b;
     color: white;
     padding: 10px 20px;

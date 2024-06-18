@@ -7,7 +7,6 @@
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f5f5f5;
   }
   
   .profile-container {
@@ -58,6 +57,7 @@
     position: relative;
     z-index: 1;
     font-size: 30px;
+    color:white;
   }
   
   .curve {
@@ -104,6 +104,7 @@
     margin: 0;
     font-size: 25px;
     font-weight: bold;
+    color:white;
   }
   
   .profile-option {
