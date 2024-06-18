@@ -7,7 +7,8 @@ const Flight = require("./flight.model");
 const currentBookingSchema = new Schema({
     flightId: {
         type: Schema.Types.ObjectId,
-        ref: `Flight` 
+        ref: `Flight`,
+        required: true,
     },
     bookingTime: {
         type: Date,

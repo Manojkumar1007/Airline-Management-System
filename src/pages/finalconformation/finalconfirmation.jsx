@@ -29,7 +29,7 @@ const Finalconfirmation = () =>{
         }
   
         const data = await response.json();
-        alert('Flight booked successfully: ' + data.booking.traveller.firstName);
+        alert('Flight booked successfully: ' + data.booking.pnr);
         navigate('/bookingsuccess')
       } catch (error) {
         alert('Error booking flight: ' + error.message);
