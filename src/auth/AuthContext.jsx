@@ -16,7 +16,6 @@ export const authReducer = (state,action) => {
         case 'logout':
             return{
                 user: null,
-                userLogin: null,
                 isAuthenticated: false,
             }
         default :
@@ -26,29 +25,29 @@ export const authReducer = (state,action) => {
 
 export const AuthContextProvider = ({children}) => {
     const [state,dispatch] = useReducer(authReducer,{
-        user: null,
-        userLogin: null,
-        isAuthenticated: null,
+        user: JSON.parse(localStorage.getItem('user')) || null,
+        isAuthenticated: JSON.parse(localStorage.getItem('isAuthenticated')) || false,
     });
 
     useEffect(() => {
-        const storedState = JSON.parse(localStorage.getItem("authState"));
-
-        if(storedState){
-            dispatch(storedState);
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'));
+        if(storedUser && isAuthenticated){
+            dispatch({type: 'login', payload: storedUser});
         }
     },[]);
 
     useEffect(() => {
-        localStorage.setItem("authState", JSON.stringify(state));
-    },[state]);
+        localStorage.setItem("user", JSON.stringify(state.user));
+        localStorage.setItem('isAuthenticated', JSON.stringify(state.isAuthenticated));
+    },[state.user, state.isAuthenticated]);
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        if(user){
-            dispatch({type:'login', payload: user});
-        }
-    },[]);
+    // useEffect(() => {
+    //     const user = JSON.parse(localStorage.getItem("user"));
+    //     if(user){
+    //         dispatch({type:'login', payload: user});
+    //     }
+    // },[]);
 
     console.log("AuthContext State", state);
 

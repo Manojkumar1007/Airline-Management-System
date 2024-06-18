@@ -14,15 +14,15 @@ export const FlightProvider = ({ children }) => {
   });
   const [selectedSeat, setSelectedSeat] = useState( () => {
     const savedSelectedSeat = localStorage.getItem('selectedSeat');
-    return savedSelectedSeat ? (savedSelectedSeat) : null ;
+    return savedSelectedSeat ? (savedSelectedSeat) : '' ;
   });
   const [pnr, setPnr] = useState( () => {
     const savedPnr = localStorage.getItem('pnr');
-    return savedPnr ? (savedPnr) : null ;
+    return savedPnr ? (savedPnr) : '' ;
   });
   const [lastName, setLastName] = useState(() => {
     const savedLastName = localStorage.getItem('lastName');
-    return savedLastName ? (savedLastName) : null ;
+    return savedLastName ? (savedLastName) : '' ;
   });
   const [flightInfo, setFlightInfo] = useState(() => {
     const savedFlightInfo = localStorage.getItem('flightInfo');
