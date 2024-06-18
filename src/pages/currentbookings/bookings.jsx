@@ -47,7 +47,38 @@ const BookingsPage = () => {
       <div className="content-book">
         {activeTab === 'current' && (
           <div className="bookings-content">
-            <p>No available data</p>
+              <div className='book-cont'>
+                <div className='col0-b'> 
+                 <img className='img' src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" />
+                </div>
+                <div className="col1-b">
+                  <h4 className="air">
+                   Akasa<br />
+                   <span className="flightnum">iQ 123</span>
+                 </h4>
+               </div>
+               <div className="col2-b">
+                 <p className="location">
+                   6.00
+                   <br />
+                   <span className="city">Blr</span>
+                 </p>
+               </div>
+               <div className="col3-b">
+                 <p className="time">
+                    3h 50m
+                    <hr />
+                   <span>non-stop</span>
+                 </p>
+               </div>
+               <div className="col4-b">
+                 <p className="location">
+                   9.00
+                   <br />
+                   <span className="city">gwt</span>
+                 </p>
+               </div>
+             </div>
           </div>
         )}
         {activeTab === 'cancelled' && (

@@ -74,7 +74,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     height:500px;
   }
   
@@ -82,3 +82,26 @@
     font-size: 18px;
     color: #888;
   } 
+ .book-cont{
+  display: flex;
+  width: 80%;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  height: 100px;
+ }
+ .col0-b{
+  margin-top: 5%;
+   width: 15%;
+ }
+ .col1-b{
+  width: 20%;
+ }
+ .col2-b{
+  width: 20%;
+ }
+ .col3-b{
+  width: 25%;
+ }
+ .col4-b{
+  width: 10% ;
+ }
