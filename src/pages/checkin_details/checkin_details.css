@@ -9,12 +9,12 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #ece5e5;
+    padding:20px;
     box-shadow: 0 0 10px rgba(188, 13, 13, 0.836);
   }
   
   .header-det {
-    background-color: #ed2e0cf8;
+    background-color: white;
     padding: 10px 20px;
   }
   
@@ -22,6 +22,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .navbar-Details p{
+    color:rgb(236, 109, 5);
+    font-size:20px;
   }
   
   .right-section {
@@ -56,6 +60,11 @@
   .passenger-info-d {
     display: flex;
     flex-direction: column;
+    color:white;
+  }
+  .flight-date-info{
+    color:white;
+    font-size:18px;
   }
   
   .flight-route {
@@ -64,9 +73,6 @@
     font-size: 20px;
   }
   
-  .airport-code {
-    font-weight: bold;
-  }
   
   .arrow {
     margin: 0 10px;
@@ -91,6 +97,7 @@
     max-width: 300px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    color:#ec740c;
   }
   
   .check-in-form button {
@@ -100,10 +107,21 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    
+  }
+  .check-in-form button:hover {
+    background-color:#ec740c;
   }
   
   .return-link-det a {
     color: #ac821a;
     text-decoration: none;
+  }
+  .info-label {
+    color:rgb(205, 84, 18);
+  }
+  .info-label-d {
+    color:rgb(240, 236, 233);
+    font-weight:bold;
   }
   

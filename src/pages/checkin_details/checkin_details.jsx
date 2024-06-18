@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FlightContext } from "../../Helper/FlightContext";
+import './checkin_details.css';
 // import { Info } from '../../Helper/helper';
 // import { useContext } from 'react';
 const CheckInDetails = () => {
@@ -81,11 +82,15 @@ const CheckInDetails = () => {
         </div>
       </header>
       <main>
-        <div className="flight-info">
-          <div className="flight-details">
+        <div className="flight-info-d">
+          <div className="flight-details-d">
             <div className="flight-route">
-              <span className="info-label">Flight-Details: </span>
+              <span className="info-label-d">  
+                Flight-Details: 
+                <br/>
+               </span>&nbsp;&nbsp;
               <br />
+              <br/>
               <span className="airport-code">
                 {flightInfo.flightId?.companyName}
               </span>
@@ -94,23 +99,23 @@ const CheckInDetails = () => {
               </span>
             </div>
             <div className="flight-destination">
-              <span>{flightInfo.flightId?.startingCity}</span>
+              <span className="flight-date-info">{flightInfo.flightId?.startingCity}</span>
               <span> -- </span>
-              <span>{flightInfo.flightId?.destinationCity}</span>
+              <span className="flight-date-info">{flightInfo.flightId?.destinationCity}</span>
             </div>
           </div>
           <br />
-          <div className="flight-date">
+          <div className="flight-date-d">
             <div className="flight-date-item">
-              <span className="info-label">Date: </span>
-              <span>{flightInfo.flightId?.travelDate}</span>
-            </div>
+              <span className="flight-date-info">Date:  </span>&nbsp;&nbsp;
+              <span className="flight-date-info">{flightInfo.flightId?.travelDate}</span>
+            </div> 
           </div>
           <br />
-          <div className="passenger-info">
+          <div className="passenger-info-d">
             <div className="passenger-info-item">
-              <span className="info-label">layovers: </span>
-              <span>{displayLayovers(flightInfo.flightId?.layovers)}</span>
+              <span className="flight-date-info">Layovers:  </span>&nbsp;&nbsp;
+              <span className="flight-date-info">{displayLayovers(flightInfo.flightId?.layovers)}</span>
             </div>
           </div>
         </div>

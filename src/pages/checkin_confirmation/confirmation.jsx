@@ -3,7 +3,7 @@ import React, {useContext, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { FlightContext } from '../../Helper/FlightContext';
 //import { Info } from '../../Helper/helper';
-
+import './confirmation.css';
 function Confirmation() {
   //const { allInf } = useContext(Info);
   const { flightInfo, baggage } = useContext(FlightContext);
@@ -68,8 +68,8 @@ function Confirmation() {
           <div className="info-item"><strong>Additional Baggage:</strong> <span id="baggage">{baggage}</span></div>
         </div>
         <div className="actions">
-          <button id="sendEmailButton" onClick={handleSendEmail}>Send Email</button>
-          <button onClick={handleOnClick}>Home</button>
+          <button  className="but" id="sendEmailButton" onClick={handleSendEmail}>Send Email</button>
+          <button className="but" onClick={handleOnClick}>Home</button>
         </div>
       </section>
     </div>
