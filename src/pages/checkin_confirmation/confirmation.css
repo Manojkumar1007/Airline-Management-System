@@ -1,7 +1,7 @@
 .body-confirm {
     font-family: 'Roboto', sans-serif;
     background-color: #f7f8fc;
-    color: #db4d0b;
+    color: #e95f0a;
     margin-top:45px;
     margin-left:190px;
     padding: 0;
@@ -27,7 +27,7 @@
   
   .header-confirm h1 {
     margin: 0;
-    color: #f0610e;
+    color: #ff7e5f;
   }
   
   section.confirmation {
@@ -36,12 +36,12 @@
   }
   
   .h2-confirm {
-    color: #e95f0a;
+    color: #ff7e5f;
   }
   
   .confirmation-message {
     background-color: #e9e7ddbc;
-    color: #e37e12;
+    color:#ff7e5f;
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 20px;
@@ -83,5 +83,8 @@
   }
   .flight-info{
     box-shadow:  0 0 10px rgba(128, 128, 124, 0.836);
+  }
+  .confirmation h2{
+    color:#ff7e5f;
   }
   

@@ -35,7 +35,6 @@ const ProfileEdit = () => {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
         />
-        <br /><br />
         <label className="edit-label" htmlFor="email">Email</label>
         <input
           type="email"
@@ -44,7 +43,6 @@ const ProfileEdit = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <br /><br />
         <label className="edit-label"htmlFor="mobile-number">Mobile Number</label>
         <input className="edit-input"
           type="text"
@@ -54,7 +52,6 @@ const ProfileEdit = () => {
           onChange={(e) => setMobileNumber(e.target.value)}
         />
       </form>
-      <br /><br /><br /><br /><br /><br /><br /><br />
       <button className="save-edit" type="button" onClick={saveProfile}>Save</button>
     </div>
   );

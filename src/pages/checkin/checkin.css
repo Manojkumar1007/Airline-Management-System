@@ -3,7 +3,7 @@
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    background-color:#eb5e3b;
+    background-color:#ff7e5f;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -76,10 +76,12 @@
     border-radius: 4px;
     margin-top:20px;
     font-weight:bold;
+    width:20%;
+    margin-left:240px;
   }
   
   .button-checkin:hover {
-    background-color: #b7b2b2;
+    background-color: #f1eded;
   }
   
   .checkin-result {

@@ -10,17 +10,18 @@
     align-items: center;
     padding: 20px;
     background-color: #f5f5f5;
-    height: 100vh;
+    height: 75vh;
   }
   
   .edit-header {
     display: flex;
     align-items: center;
-    width: 100%;
+    width:65%;
     background-color: #ff7e5f;
     color: white;
     padding: 10px 20px;
     position: relative;
+    
   }
   
   .back-btn-edit {
@@ -30,17 +31,30 @@
     font-size: 24px;
     cursor: pointer;
     margin-right: 20px;
+    margin-left:-40px;
   }
   
   .edit-h2 {
-    margin: 0;
+    margin-left: 10px;
+    color:#ff7e5f;
+    position: absolute;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
   }
   
   .profile-form {
-    display: flex;
-    flex-direction: column;
     width: 100%;
-    max-width: 400px;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-left:120px;
+    margin-top:15px;
+    margin-right:120px;
+    box-shadow: 0 0 10px rgb(214, 35, 3);
   }
   
   .edit-label {
@@ -55,7 +69,7 @@
   }
   
   .save-edit {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px 20px;
     background-color: #ff7e5f;
     color: white;
