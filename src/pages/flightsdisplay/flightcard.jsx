@@ -38,9 +38,9 @@ function Flightcard(props) {
       <div className="con">
         <div className="col0">
            <h4 className="air">
-           {props.companyName}<br />
-           <span className="flightnum">{props.flightNumber}</span>
-         </h4>
+              {props.companyName}<br />
+              <span className="flightnum">{props.flightNumber}</span>
+           </h4>
         </div>
         <div className="col1">
           <img className="img" src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" />
