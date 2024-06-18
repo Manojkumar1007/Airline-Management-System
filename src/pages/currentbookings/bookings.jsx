@@ -1,92 +1,129 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './bookings.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./bookings.css";
+// import axios from "axios";
 
 const BookingsPage = () => {
-  const [activeTab, setActiveTab] = useState('none');
+  const [activeTab, setActiveTab] = useState("none");
+  const [currentBookings, setCurrentBookings] = useState([]);
+  const [error, setError] =useState(null);
   const navigate = useNavigate();
 
   const handleMouseEnter = (tab) => {
     setActiveTab(tab);
+    if (tab === "current") {
+      fetchCurrentBookings();
+    }
   };
 
   const handleMouseLeave = () => {
-    setActiveTab('none');
+    setActiveTab("none");
   };
 
   const handleBackClick = () => {
-    navigate('/Profile');
+    navigate("/Profile");
   };
+
+  const fetchCurrentBookings = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/current-bookings");
+      if(!response.ok){
+        throw new Error("Failed to fetch current bookings");
+      }
+      const data = await response.json();
+      setCurrentBookings(data);
+    } catch (error) {
+      console.error("Error fetching current bookings:", error);
+      setError("Error fetching current bookings. Please try again later.");
+    }
+  };
+
+  function displayLayovers(layovers){
+    return layovers === 0 ? "Non-Stop" : `${layovers} Layovers`;
+  }
 
   return (
     <div className="bookings-container">
-      <button className="back-button-book" onClick={handleBackClick}>Back</button>
+      <button className="back-button-book" onClick={handleBackClick}>
+        Back
+      </button>
       <div className="tabs-book">
         <div
-          className={`tab-book ${activeTab === 'current' ? 'active' : ''}`}
-          onMouseEnter={() => handleMouseEnter('current')}
+          className={`tab-book ${activeTab === "current" ? "active" : ""}`}
+          onMouseEnter={() => handleMouseEnter("current")}
           onMouseLeave={handleMouseLeave}
         >
           Current Bookings
         </div>
         <div
-          className={`tab-book ${activeTab === 'cancelled' ? 'active' : ''}`}
-          onMouseEnter={() => handleMouseEnter('cancelled')}
+          className={`tab-book ${activeTab === "cancelled" ? "active" : ""}`}
+          onMouseEnter={() => handleMouseEnter("cancelled")}
           onMouseLeave={handleMouseLeave}
         >
           Cancelled Bookings
         </div>
         <div
-          className={`tab-book ${activeTab === 'past' ? 'active' : ''}`}
-          onMouseEnter={() => handleMouseEnter('past')}
+          className={`tab-book ${activeTab === "past" ? "active" : ""}`}
+          onMouseEnter={() => handleMouseEnter("past")}
           onMouseLeave={handleMouseLeave}
         >
           Past Flights
         </div>
       </div>
       <div className="content-book">
-        {activeTab === 'current' && (
+        {activeTab === "current" && (
           <div className="bookings-content">
-              <div className='book-cont'>
-                <div className='col0-b'> 
-                 <img className='img' src="https://images.ixigo.com/img/common-resources/airline-new/AI.png" alt="flightimg" />
+            {error && <p className="error-message">{error}</p>}
+            {currentBookings.length > 0 ? (
+              currentBookings.map((booking) => (
+              <div key={booking._id} className="book-cont">
+                <div className="col0-b">
+                  <img
+                    className="img"
+                    src="https://images.ixigo.com/img/common-resources/airline-new/AI.png"
+                    alt="flightimg"
+                  />
                 </div>
                 <div className="col1-b">
                   <h4 className="air">
-                   Akasa<br />
-                   <span className="flightnum">iQ 123</span>
-                 </h4>
-               </div>
-               <div className="col2-b">
-                 <p className="location">
-                   6.00
-                   <br />
-                   <span className="city">Blr</span>
-                 </p>
-               </div>
-               <div className="col3-b">
-                 <p className="time">
-                    3h 50m
+                    {booking.flightId?.companyName || 'N/A'}
+                    <br />
+                    <span className="flightnum">{booking.flightId?.flightNumber || 'N/A'}</span>
+                  </h4>
+                </div>
+                <div className="col2-b">
+                  <p className="location">
+                    {booking.flightId ? new Date(booking.flightId.startTime).toLocaleTimeString() : 'N/A'}
+                    <br />
+                    <span className="city">{booking.flightId?.startingCity || 'N/A'}</span>
+                  </p>
+                </div>
+                <div className="col3-b">
+                  <p className="time">
+                  {booking.flightId ? `${Math.floor((new Date(booking.flightId?.endTime)-new Date(booking.flightId?.startTime))/60000)} min` : 'N/A'}
                     <hr />
-                   <span>non-stop</span>
-                 </p>
-               </div>
-               <div className="col4-b">
-                 <p className="location">
-                   9.00
-                   <br />
-                   <span className="city">gwt</span>
-                 </p>
-               </div>
-             </div>
+                    <span>{booking.flightId ? displayLayovers(booking.flightId?.layovers) : 'N/A'}</span>
+                  </p>
+                </div>
+                <div className="col4-b">
+                  <p className="location">
+                    {booking.flightId ? new Date(booking.flightId.endTime).toLocaleTimeString() : 'N/A'}
+                    <br />
+                    <span className="city">{booking.flightId?.destinationCity || 'N/A'}</span>
+                  </p>
+                </div>
+              </div>))
+            ) : (
+              <p>No available data</p>
+            )}
           </div>
         )}
-        {activeTab === 'cancelled' && (
+        {activeTab === "cancelled" && (
           <div className="bookings-content">
             <p>No available data</p>
           </div>
         )}
-        {activeTab === 'past' && (
+        {activeTab === "past" && (
           <div className="bookings-content">
             <p>No available data</p>
           </div>

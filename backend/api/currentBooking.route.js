@@ -59,10 +59,11 @@ const sendBookingEmail = (flight, userEmail, selectedSeat, pnr) => {
 //Route to get current bookings with flight details
 router.get("/current-bookings", async (req,res) => {
     try {
-        const bookings = await CurrentBooking.find().populate("flightId");
+        const bookings = await CurrentBooking.find().populate("flightId").exec();
         res.status(200).json(bookings);
     } catch (error) {
-        res.status(500).json({message: error.message});
+        console.error('Error fetching current bookings:', error);
+        res.status(500).json({message: "Failed to fecth current bookings"});
     }
 });
 

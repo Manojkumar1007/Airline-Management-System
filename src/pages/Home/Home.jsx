@@ -3,11 +3,10 @@ import {useNavigate} from 'react-router-dom';
 import Flightcard from "../flightsdisplay/flightcard";
 import flightimg from './image.png';
 import './Home.css';
-import { useAuthContext } from "../../auth/useAuthContext";
+// import { useAuthContext } from "../../auth/useAuthContext";
 const Home = () =>{
     
     const navigate = useNavigate()
-    const {isAuthenticated} = useAuthContext();
     const handleClick=() =>{
         // if(isAuthenticated){
         //     navigate("/searchflights");

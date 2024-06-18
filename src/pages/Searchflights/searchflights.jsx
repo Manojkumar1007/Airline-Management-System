@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './searchflights.css';
+import { useAuthContext } from '../../auth/useAuthContext';
 //import { Info } from "../../Helper/helper";
 
 const Searchflights = () => {
@@ -25,9 +26,16 @@ const Searchflights = () => {
   //   }
   // }
 
+  const {isAuthenticated} = useAuthContext();
   const handleSubmit =async (e) => {
     e.preventDefault();
-    navigate('/flightdisplay', {state: searchInf});
+    if(isAuthenticated){
+      navigate('/flightdisplay', {state: searchInf});
+    }else{
+      alert("Please Login to your account to continue booking!");
+      navigate('/login');
+    }
+    
   };
 
   return (
