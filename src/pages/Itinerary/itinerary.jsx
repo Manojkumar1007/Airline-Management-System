@@ -29,11 +29,6 @@ function Itinerary() {
 
   return (
     <div className="app-itinerary">
-      <header className="header-itinerary">
-        <nav className="nav-itinerary">
-          <div className="logo-itinerary">Apna Flights</div>
-        </nav>
-      </header>
       <div className="container-itinerary">
         <div className="content-itinerary">
           <div className="itinerary">
