@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FlightContext } from "../../Helper/FlightContext";
-import './checkin_details.module.css';
+import './checkin_details.css';
 // import { Info } from '../../Helper/helper';
 // import { useContext } from 'react';
 const CheckInDetails = () => {

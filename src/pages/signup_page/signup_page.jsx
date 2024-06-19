@@ -35,17 +35,17 @@ function Signup_page(){
     }
 
     return(
-        <div className="container-signup">
-            <h2 className="h2-signup">Create an Account</h2>
-            <form className="form-signup" id="signupForm" onSubmit={handleSubmit} >
-                <label className="label-signup"htmlFor="username">Username:</label>
-                <input className="input-signup"type="text" id="username" value={user.username} onChange={handleInput} name="username" required />
+        <div className="container">
+            <h2 className="h2">Create an Account</h2>
+            <form className="form" id="signupForm" onSubmit={handleSubmit} >
+                <label className="label"htmlFor="username">Username:</label>
+                <input className="input"type="text" id="username" value={user.username} onChange={handleInput} name="username" required />
         
-                <label className="label-signup"htmlFor="email">Email:</label>
-                <input className="input-signup"type="email" id="email" value={user.email} onChange={handleInput} name="email" required />
+                <label className="label"htmlFor="email">Email:</label>
+                <input className="input"type="email" id="email" value={user.email} onChange={handleInput} name="email" required />
         
-                <label className="label-signup"htmlFor="password">Password:</label>
-                <input className="input-signup"type="password" id="password" value={user.password} onChange={handleInput} name="password" required />
+                <label className="label-"htmlFor="password">Password:</label>
+                <input className="input"type="password" id="password" value={user.password} onChange={handleInput} name="password" required />
 
                 <button type="submit">Sign Up</button>
             </form>

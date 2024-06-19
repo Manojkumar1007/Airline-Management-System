@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FlightContext } from '../../Helper/FlightContext';
-import './itinerary.module.css';
+import './itinerary.css';
 function Itinerary() {
   const navigate = useNavigate();
   // const { allInf,setAllInf } = useContext(Info);

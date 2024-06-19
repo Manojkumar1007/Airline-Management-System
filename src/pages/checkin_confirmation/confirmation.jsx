@@ -3,7 +3,7 @@ import React, {useContext, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { FlightContext } from '../../Helper/FlightContext';
 //import { Info } from '../../Helper/helper';
-import './confirmation.module.css';
+import './confirmation.css';
 function Confirmation() {
   //const { allInf } = useContext(Info);
   const { flightInfo, baggage } = useContext(FlightContext);

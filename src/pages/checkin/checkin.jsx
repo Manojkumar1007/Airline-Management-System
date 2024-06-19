@@ -1,7 +1,7 @@
 import React, { useContext, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FlightContext } from '../../Helper/FlightContext';
-import './checkin.module.css';
+import './checkin.css';
 const CheckInForm = () => {
   const navigate = useNavigate();
   const {pnr, setPnr} = useContext(FlightContext);
