@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./bookings.css";
+import { ProfileContext } from "../../Helper/ProfileContext";
 // import axios from "axios";
 
 const BookingsPage = () => {
@@ -8,11 +9,12 @@ const BookingsPage = () => {
   const [currentBookings, setCurrentBookings] = useState([]);
   const [error, setError] =useState(null);
   const navigate = useNavigate();
+  const {profile} = useContext(ProfileContext);
 
   const handleMouseEnter = (tab) => {
     setActiveTab(tab);
     if (tab === "current") {
-      fetchCurrentBookings();
+      fetchCurrentBookings(profile.email);
     }
   };
 
@@ -24,9 +26,9 @@ const BookingsPage = () => {
     navigate("/Profile");
   };
 
-  const fetchCurrentBookings = async () => {
+  const fetchCurrentBookings = async (email) => {
     try {
-      const response = await fetch("http://localhost:5000/current-bookings");
+      const response = await fetch(`http://localhost:5000/current-bookings?email=${email}`);
       if(!response.ok){
         throw new Error("Failed to fetch current bookings");
       }
