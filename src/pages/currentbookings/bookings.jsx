@@ -83,7 +83,8 @@ const BookingsPage = () => {
                     src="https://images.ixigo.com/img/common-resources/airline-new/AI.png"
                     alt="flightimg"
                   /><br />
-                  <div>{booking.flightId?.lastname || 'N/A'}</div>
+                  <div>{booking.traveller?.lastName || 'N/A'}<br />{new Date(booking.flightId?.travelDate).toLocaleDateString()}</div>
+                 
                 </div>
                 <div className="col1-b">
                   <h4 className="air">
