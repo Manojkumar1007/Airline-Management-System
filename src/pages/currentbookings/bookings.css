@@ -57,43 +57,34 @@
     background-color: #feb47b;
   }
   
-  .content-book {
+  .book-cont{
+    background-color: white;
+    width: 70%;
+    border-radius: 20px;
     display: flex;
+    padding: 10px;
+    margin-right: 10%;
+    height: 100px;
+    margin-bottom: 0.5%;
+    box-shadow: #aaa;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 800px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
   }
   
-  .bookings-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* justify-content: center; */
-    align-items: center;
-    height:500px;
-  }
   
-  .bookings-content p {
-    font-size: 18px;
-    color: #888;
-  } 
 
   .col0-book{
     margin-top: 10px;
-    width: 15%;
+    width: 25%;
+    margin-right: 5%;
   }
   .col1-book{
     width: 20%;
+    margin-left: 5%;
   }
   .col2-book{
     width: 20%;
+
   }
   .col3-book{
     width: 25%;
@@ -101,5 +92,20 @@
     margin-bottom: 5%;
   }
   .col4-book{
-    width: 20% ;
+    width: 20%;
+   
+  }
+  .content-book{
+    width: 90%;
+    margin-left: 5%;
+  }
+  .bookings-content{
+    margin-left: 15%;
+    justify-content: center;
+    align-items: center;
+  }
+  .bookings-content p{
+    justify-content: center;
+    align-items: center;
+    margin-left: 30%;
   }
