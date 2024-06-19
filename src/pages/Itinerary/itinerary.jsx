@@ -28,12 +28,12 @@ function Itinerary() {
   };
 
   return (
-    <div className="app-itinerary">
+    <div >
       <div className="container-itinerary">
         <div className="content-itinerary">
           <div className="itinerary">
             <h2>View Your Itinerary</h2>
-            <div className="itineraryDetails">
+            <div >
               <div className="detail">{flightInfo.flightId.startingCity} to {flightInfo.flightId.destinationCity}</div>
               <div className="detail">
                 <span>{startTime}</span> <span>{endTime}</span> <span>{flightInfo.flightId.flightNumber}</span>
