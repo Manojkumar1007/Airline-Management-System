@@ -16,23 +16,23 @@ body {
     text-align: center;
 }
 
-h2 {
+.h2-signup {
     color:#FF8A08;
     margin-bottom: 20px;
 }
 
-form {
+.form-signup {
     display: flex;
     flex-direction: column;
 }
 
-label {
+.label-signup {
     margin-bottom: 5px;
     text-align: left;
     color: #000;
 }
 
-input {
+.input-signup {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -41,7 +41,7 @@ input {
     color: #000;
 }
 
-.container #signupForm button{
+.container-signup #signupForm button{
     padding: 10px;
     background-color: #ff8a08;
     border: none;
@@ -50,7 +50,7 @@ input {
     cursor: pointer;
 }
 
-.container #signupForm button:hover {
+.container-signup #signupForm button:hover {
     background-color: #FF6504;
     
 }
@@ -60,11 +60,11 @@ p {
     color: #000;
 }
 
-.container p a {
+.container-signup p a {
     color: #FF6504;
     text-decoration: none;
 }
 
-.container p a:hover {
+.container-signup p a:hover {
     text-decoration: underline;
 }

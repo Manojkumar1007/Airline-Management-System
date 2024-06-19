@@ -36,16 +36,16 @@ function Signup_page(){
 
     return(
         <div className="container-signup">
-            <h2 className>Create an Account</h2>
-            <form id="signupForm" onSubmit={handleSubmit} >
-                <label htmlFor="username">Username:</label>
-                <input type="text" id="username" value={user.username} onChange={handleInput} name="username" required />
+            <h2 className="h2-signup">Create an Account</h2>
+            <form className="form-signup" id="signupForm" onSubmit={handleSubmit} >
+                <label className="label-signup"htmlFor="username">Username:</label>
+                <input className="input-signup"type="text" id="username" value={user.username} onChange={handleInput} name="username" required />
         
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" value={user.email} onChange={handleInput} name="email" required />
+                <label className="label-signup"htmlFor="email">Email:</label>
+                <input className="input-signup"type="email" id="email" value={user.email} onChange={handleInput} name="email" required />
         
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" value={user.password} onChange={handleInput} name="password" required />
+                <label className="label-signup"htmlFor="password">Password:</label>
+                <input className="input-signup"type="password" id="password" value={user.password} onChange={handleInput} name="password" required />
 
                 <button type="submit">Sign Up</button>
             </form>
