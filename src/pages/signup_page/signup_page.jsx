@@ -35,8 +35,8 @@ function Signup_page(){
     }
 
     return(
-        <div className="container">
-            <h2>Create an Account</h2>
+        <div className="container-signup">
+            <h2 className>Create an Account</h2>
             <form id="signupForm" onSubmit={handleSubmit} >
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" value={user.username} onChange={handleInput} name="username" required />
