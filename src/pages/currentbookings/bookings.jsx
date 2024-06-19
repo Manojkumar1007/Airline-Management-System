@@ -82,7 +82,8 @@ const BookingsPage = () => {
                     className="img"
                     src="https://images.ixigo.com/img/common-resources/airline-new/AI.png"
                     alt="flightimg"
-                  />
+                  /><br />
+                  <div>{booking.flightId?.lastname || 'N/A'}</div>
                 </div>
                 <div className="col1-b">
                   <h4 className="air">
