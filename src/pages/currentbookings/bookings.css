@@ -84,28 +84,22 @@
     font-size: 18px;
     color: #888;
   } 
- .book-cont{
-  display: flex;
-  width: 80%;
-  background-color: whitesmoke;
-  border-radius: 20px;
-  height: 100px;
- }
- .col0-b{
-  margin-top: 10px;
-   width: 15%;
- }
- .col1-b{
-  width: 20%;
- }
- .col2-b{
-  width: 20%;
- }
- .col3-b{
-  width: 25%;
-  margin-left: 5%;
-  margin-bottom: 5%;
- }
- .col4-b{
-  width: 20% ;
- }
+
+  .col0-book{
+    margin-top: 10px;
+     width: 15%;
+   }
+   .col1-book{
+    width: 20%;
+   }
+   .col2-book{
+    width: 20%;
+   }
+   .col3-book{
+    width: 25%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+   }
+   .col4-book{
+    width: 20% ;
+   }

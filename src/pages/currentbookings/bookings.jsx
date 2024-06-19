@@ -86,28 +86,28 @@ const BookingsPage = () => {
                   <div>{booking.traveller?.lastName || 'N/A'}<br />{new Date(booking.flightId?.travelDate).toLocaleDateString()}</div>
                  
                 </div>
-                <div className="col1-b">
+                <div className="col1-book">
                   <h4 className="air">
                     {booking.flightId?.companyName || 'N/A'}
                     <br />
                     <span className="flightnum">{booking.flightId?.flightNumber || 'N/A'}</span>
                   </h4>
                 </div>
-                <div className="col2-b">
+                <div className="col2-book">
                   <p className="location">
                     {booking.flightId ? new Date(booking.flightId.startTime).toLocaleTimeString() : 'N/A'}
                     <br />
                     <span className="city">{booking.flightId?.startingCity || 'N/A'}</span>
                   </p>
                 </div>
-                <div className="col3-b">
+                <div className="col3-book">
                   <p className="time">
                   {booking.flightId ? `${Math.floor((new Date(booking.flightId?.endTime)-new Date(booking.flightId?.startTime))/60000)} min` : 'N/A'}
                     <hr />
                     <span>{booking.flightId ? displayLayovers(booking.flightId?.layovers) : 'N/A'}</span>
                   </p>
                 </div>
-                <div className="col4-b">
+                <div className="col4-book">
                   <p className="location">
                     {booking.flightId ? new Date(booking.flightId.endTime).toLocaleTimeString() : 'N/A'}
                     <br />
