@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './preference.css';
 
@@ -7,6 +7,30 @@ const PreferencesPage = () => {
     const [selectedSeat, setSelectedSeat] = useState('');
     const [selectedComm, setSelectedComm] = useState('');
     const navigate = useNavigate();
+
+    // Load preferences from local storage when component mounts
+    useEffect(() => {
+        const savedMeal = localStorage.getItem('selectedMeal');
+        const savedSeat = localStorage.getItem('selectedSeat');
+        const savedComm = localStorage.getItem('selectedComm');
+
+        if (savedMeal) setSelectedMeal(savedMeal);
+        if (savedSeat) setSelectedSeat(savedSeat);
+        if (savedComm) setSelectedComm(savedComm);
+    }, []);
+
+    // Save preferences to local storage whenever they change
+    useEffect(() => {
+        localStorage.setItem('selectedMeal', selectedMeal);
+    }, [selectedMeal]);
+
+    useEffect(() => {
+        localStorage.setItem('selectedSeat', selectedSeat);
+    }, [selectedSeat]);
+
+    useEffect(() => {
+        localStorage.setItem('selectedComm', selectedComm);
+    }, [selectedComm]);
 
     const handleOnClick = () => {
         alert('Saved successfully');
@@ -42,7 +66,7 @@ const PreferencesPage = () => {
             </div>
             <div className="preference-section">
                 <h2>Seat Preferences</h2>
-                <select className="select-prefer"value={selectedSeat} onChange={handleSeatChange}>
+                <select className="select-prefer" value={selectedSeat} onChange={handleSeatChange}>
                     <option value="">Select a seat preference</option>
                     <option value="aisle">Aisle</option>
                     <option value="window">Window</option>
