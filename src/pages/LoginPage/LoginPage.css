@@ -18,23 +18,23 @@ body {
     margin-top: 5%;
 }
 
-h2 {
+.login-h2 {
     color:#FF8A08;
     margin-bottom: 20px;
 }
 
-form {
+.form-login {
     display: flex;
     flex-direction: column;
 }
 
-label {
+.login-label {
     margin-bottom: 5px;
     text-align: left;
     color: #000;
 }
 
-input {
+.input-login {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -51,7 +51,7 @@ input {
     cursor: pointer;
 }
 
-button:hover {
+.LoginButton:hover {
     background-color: #FF6504;
     
 }

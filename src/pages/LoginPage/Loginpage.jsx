@@ -27,13 +27,13 @@ function LoginPage() {
   }
   return (
     <div className="container">
-      <h2>Login</h2>
-      <form id="loginForm" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
+      <h2 classname="login-h2">Login</h2>
+      <form  classname="form-login"id="loginForm" onSubmit={handleSubmit}>
+        <label classname="login-label" htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" value={user1.email} onChange={handleInput} required />
 
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" value={user1.password} onChange={handleInput} required />
+        <label classname="login-label"htmlFor="password">Password:</label>
+        <input  classname="input-login" type="password" id="password" name="password" value={user1.password} onChange={handleInput} required />
 
         <button className="LoginButton" type="submit">
           Login
