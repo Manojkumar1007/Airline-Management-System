@@ -23,7 +23,7 @@ export const useLogin = () => {
     
             if(response.ok && userResponse.status != "FAILED"){
                 console.log(userResponse)
-                dispatch({type:"login", payload:userResponse})
+                dispatch({type:"login", payload:userResponse.data[0]})
                 setProfile(prevProfile => ({
                     ...prevProfile,
                     fullName: userResponse.data[0].name,

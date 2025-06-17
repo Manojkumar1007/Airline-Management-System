@@ -4,10 +4,18 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     name: String,
     email: String,
-    password : String,
-    verified: Boolean
-})
+    password: String,
+    verified: Boolean,
+    mobileNumber: {
+        type: String,
+        default: ""
+    },
+    profilePicture: {
+        type: String,
+        default: ""
+    }
+});
 
 const user = mongoose.model("user", userSchema);
 
-module.exports = user ;
+module.exports = user;

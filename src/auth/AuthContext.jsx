@@ -29,17 +29,22 @@ export const AuthContextProvider = ({children}) => {
         isAuthenticated: JSON.parse(localStorage.getItem('isAuthenticated')) || false,
     });
 
+    console.log("AuthContext Initial State (from localStorage):", state.user);
+
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
         const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'));
+        console.log("AuthContext useEffect (on mount) - storedUser:", storedUser);
         if(storedUser && isAuthenticated){
             dispatch({type: 'login', payload: storedUser});
         }
     },[]);
 
     useEffect(() => {
+        console.log("AuthContext useEffect (on state change) - state.user before saving:", state.user);
         localStorage.setItem("user", JSON.stringify(state.user));
         localStorage.setItem('isAuthenticated', JSON.stringify(state.isAuthenticated));
+        console.log("AuthContext useEffect (on state change) - saved to localStorage:", localStorage.getItem("user"));
     },[state.user, state.isAuthenticated]);
 
     // useEffect(() => {
@@ -49,7 +54,7 @@ export const AuthContextProvider = ({children}) => {
     //     }
     // },[]);
 
-    console.log("AuthContext State", state);
+    console.log("AuthContext Current State (render):", state);
 
     return (
         <AuthContext.Provider value={{...state,dispatch}}>

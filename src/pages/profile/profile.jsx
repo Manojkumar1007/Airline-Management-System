@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './profile.css';
 import { ProfileContext } from '../../Helper/ProfileContext';
 import userlogo from '../../assets/user.png'; 
+
 const Profile = () => {
   const { profile } = useContext(ProfileContext);
   const navigate = useNavigate();
@@ -11,15 +12,16 @@ const Profile = () => {
     navigate(path);
   };
 
-
   return (
     <div className="body-profile">
       <div className="profile-container">
         <div className="profile-card">
           <div className="header-profile">
-            <div className="profile-pic-container">
-              <img src={userlogo} alt="Profile Picture" className="profile-pic" />
-            </div>
+            {profile.profilePicture ? (
+              <div className="profile-pic-container">
+                <img src={profile.profilePicture} alt="Profile Picture" className="profile-pic" />
+              </div>
+            ) : null}
             <h2 className="h2-profile">Welcome, {profile.fullName}</h2>
           </div>
           <svg viewBox="0 0 1440 320" className="curve">
@@ -28,7 +30,7 @@ const Profile = () => {
         </div>
         <div className="profile-option">
           <a href="#" className="profile-link" onClick={() => handleNavigation('/ProfileEdit')}>
-            <span>View Profile</span>
+            <span>Edit Profile</span>
           </a>
         </div>
         <div className="stats">

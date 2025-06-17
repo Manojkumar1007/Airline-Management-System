@@ -22,6 +22,19 @@ const bcrypt = require("bcrypt");
 //path for static verified page 
 const path = require("path");
 
+// Cloudinary setup
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Multer setup for file uploads
+const multer = require("multer");
+const storage = multer.memoryStorage(); // Store files in memory as buffers
+const upload = multer({ storage: storage });
+
 //express-validator
 const { body, validationResult } = require('express-validator');
 
@@ -44,299 +57,300 @@ transporter.verify((error,success) => {
     }
 })
 
-function trimString(value){
-    return typeof value === 'string' ? value.trim() : value 
-}
+const { 
+    trimString, 
+    validateUserInput, 
+    sendVerificationEmail, 
+    verifyEmail,
+    updateUserProfile 
+} = require("../functions/userFunctions");
 
 //Signup
-router.post('/signup',(req,res) => {
-    let {name, email, password} = req.body;
+router.post('/signup', async (req, res) => {
+    let { name, email, password } = req.body;
     name = trimString(name);
     email = trimString(email);
     password = trimString(password);
-    //dateOfBirth = dateOfBirth.trim();
 
-    if(name == "" || email == "" || password == ""){
-        res.json({
+    const validation = validateUserInput(name, email, password);
+    if (!validation.isValid) {
+        return res.json({
             status: "FAILED",
-            message: "Empty input fields!"
+            message: validation.message
         });
-    }else if(!/^[a-zA-Z ]*$/.test(name)){
-        res.json({
-            status: "FAILED",
-            message: "Invalid name entered"
-        });
-    }else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
-        res.json({
-            status: "FAILED",
-            message: "Invalid email entered"
-        });
-    }else if(password.length < 8){
-        res.json({
-            status: "FAILED",
-            message: "Password is too short"
-        });
-    }else{
-        //checking for if user already exists
-        user.find({email}).then(result => {
-            console.log("Result from user.find({email}):", result);
-            if(result.length){
-                //A user already exists
-                res.json({
-                    status: "FAILED",
-                    message: "User with the provided email already exists"
-                })
-            }else{
-                //try to create a new user 
+    }
 
-                //password handling
-                const saltRounds = 10 ;
-                bcrypt.hash(password, saltRounds).then(hashedPassword => {
-                    const newUser = new user({
-                        name,
-                        email,
-                        password: hashedPassword,
-                        //dateOfBirth
-                    });
-
-                    newUser.save().then(result => {
-                        //handle account verification
-                        sendVerificationEmail(result, res);
-                    })
-                    .catch(err => {
-                        res.json({
-                            status: "FAILED",
-                            message: "An Error Occured while saving user account!"
-                        });
-                    })
-                }).catch(err => {
-                    res.json({
-                        status: "FAILED",
-                        message: "An Error Occured while hashing password!"
-                    });
-                })
-            }
-        }).catch(err => {
-            console.log(err);
-            res.json({
+    try {
+        const existingUser = await user.find({ email });
+        if (existingUser.length) {
+            return res.json({
                 status: "FAILED",
-                message: "An Error Occured while checking for existing user!"
+                message: "User with the provided email already exists"
             });
-        })
+        }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const newUser = new user({
+            name,
+            email,
+            password: hashedPassword,
+        });
+
+        const savedUser = await newUser.save();
+        await sendVerificationEmail(savedUser, res);
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            status: "FAILED",
+            message: "An error occurred while creating user account"
+        });
     }
 });
 
-//send verification email
-const sendVerificationEmail = ({_id,email}, res) => {
-    //url to be used in the email
-    const currentUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}/` ;
-
-    const uniqueString = uuidv4() + _id;
-
-    //mail options
-    const mailOptions = {
-        from: process.env.AUTH_EMAIL,
-        to: email,
-        subject: "Verify Your Email",
-        html: `<p>Verify your email address to complete the signup and login into your account</p><p>This link <b>expires in 6 hours.</b></p><p>Press <a href=${currentUrl + "user/verify/"+ _id + "/" + uniqueString}>here</a> to proceed</p>`
-    };
-
-    //hash the unique string
-    const saltRounds = 10 ;
-    bcrypt
-        .hash(uniqueString, saltRounds)
-        .then((hashedUniqueString) => {
-            //set values in userVerification collection
-            const newVerification = new userVerification({
-                userId: _id,
-                uniqueString: hashedUniqueString,
-                createdAt: Date.now(),
-                expiresAt: Date.now() + 21600000,
-            });
-
-            newVerification
-                .save()
-                .then(() => {
-                    transporter.sendMail(mailOptions)
-                    .then(()=> {
-                        //email sent and verification record saved
-                        res.json({
-                            status: "PENDING",
-                            message: "Verification email sent",
-                        });
-                    })
-                    .catch((error) => {
-                        res.json({
-                            status: "FAILED",
-                            message: "Verification email failed",
-                        });
-                    })
-                })
-                .catch((error) => {
-                    console.log(error);
-                    res.json({
-                        status: "FAILED",
-                        message: "Couldn't save verification email data!",
-                    });
-                })
-        })
-        .catch(()=>{
-            res.json({
-                status: "FAILED",
-                message: "An error occured while hashing your email data",
-            });
-        })
-}
 //verify email
-router.get("/verify/:userId/:uniqueString", (req,res) => {
-    let {userId,uniqueString} = req.params;
-
-    userVerification
-        .find({userId})
-        .then((result) => {
-            if(result.length > 0) {
-                //user verification record exists so we proceed
-
-                const {expiresAt} = result[0];
-                const hashedUniqueString = result[0].uniqueString;
-                if(expiresAt < Date.now()){
-                    //record has expired so we delete it
-                    userVerification
-                    .deleteOne({userId})
-                    .then(result => {
-                        user.deleteOne({_id: userId})
-                        .then(() => {
-                            let message = "Link has expired. Please sign up again.";
-                            res.redirect(`/user/verified/error=true&message=${message}`);
-                        })
-                        .catch(error => {
-                            let message = "Clearing user with expired unique string failed";
-                            res.redirect(`/user/verified/error=true&message=${message}`);
-                        })
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        let message = "An error occured while clearing expired user verification record";
-                        res.redirect(`/user/verified/error=true&message=${message}`);
-                    })
-                }else{
-                    //valid record exists so we validate the user string
-                    //first compare the hashed unique string
-                    bcrypt.compare(uniqueString, hashedUniqueString)
-                    .then(result => {
-                        if(result) {
-                            //strings match
-
-                            user.updateOne({_id: userId}, {verified: true})
-                            .then(() => {
-                                userVerification.deleteOne({userId})
-                                .then(() => {
-                                    res.sendFile(path.join(__dirname, "./../views/verified.html"));
-                                })
-                                .catch(error => {
-                                    console.log(error)
-                                    let message = "An error occured while finalizing successful verification.";
-                                    res.redirect(`/user/verified/error=true&message=${message}`);
-                                })
-                            })
-                            .catch(error => {
-                                let message = "An error occured while updating user record to show verified.";
-                                res.redirect(`/user/verified/error=true&message=${message}`);
-                            })
-                        }else{
-                            //existing record but incorrect verification details passed.
-                            let message = "Invalid verification details passed. Check your inbox.";
-                            res.redirect(`/user/verified/error=true&message=${message}`);
-                        }
-                    })
-                    .catch(error => {
-                        let message = "An error occured while comparing unique strings.";
-                        res.redirect(`/user/verified/error=true&message=${message}`);
-                    })
-                }
-            }else{
-                //user verification record doesn't exist
-                let message = "Account record doesn't exist or has been verified already. Please sign up or log in.";
-                res.redirect(`/user/verified/error=true&message=${message}`);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-            let message = "An error occured while checking for existing user verification record";
-            res.redirect(`/user/verified/error=true&message=${message}`);
-        })
-
-})
+router.get("/verify/:userId/:uniqueString", (req, res) => {
+    const { userId, uniqueString } = req.params;
+    verifyEmail(userId, uniqueString, res);
+});
 
 //verified page route
-router.get("/verified", (req,res) => {
-    res.sendFile(path.join(__dirname,"./../views/verified.html"));
+router.get("/verified", (req, res) => {
+    res.sendFile(path.join(__dirname, "./../views/verified.html"));
 });
 
 //Signin
-router.post('/signin',(req,res) =>{
-    let {email, password} = req.body;
-    email = email.trim();
-    password = password.trim();
+router.post('/signin', async (req, res) => {
+    let { email, password } = req.body;
+    email = trimString(email);
+    password = trimString(password);
 
-    if(email == "" || password == ""){
-        res.json({
+    if (email === "" || password === "") {
+        return res.json({
             status: "FAILED",
             message: "Empty credentials Supplied"
         });
-    }else{
-        //check if user exist
-        user.find({email})
-        .then(data => {
-            if (data.length) {
-                //user exists
+    }
 
-                //check if user is verified
+    try {
+        const data = await user.find({ email });
+        if (!data.length) {
+            return res.json({
+                status: "FAILED",
+                message: "Invalid credentials entered!"
+            });
+        }
 
-                if(!data[0].verified){
-                    res.json({
-                        status : "FAILED",
-                        message: "Email hasn't been verified yet. Check your inbox.",
-                    });
-                }else{
-                    const hashedPassword = data[0].password;
-                    bcrypt.compare(password,hashedPassword).then(result => {
-                    if(result) {
-                        //password match
-                        res.json({
-                            status : "SUCCESS",
-                            message: "Signin successful",
-                            data: data
-                        });
-                    }else{
-                        res.json({
-                            status : "FAILED",
-                            message: "Invalid password entered!",
-                        });
-                    }
-                    })
-                    .catch(err => {
-                        res.json({
-                            status : "FAILED",
-                            message: "An error occured while comparing the passwords",
-                        });
-                    })
-                }
-                
-            }else{
-                res.json({
-                    status : "FAILED",
-                    message: "Invalid credentials entered!",
-                });
-            }
-        })
-        .catch(err => {
+        if (!data[0].verified) {
+            return res.json({
+                status: "FAILED",
+                message: "Email hasn't been verified yet. Check your inbox."
+            });
+        }
+
+        const result = await bcrypt.compare(password, data[0].password);
+        if (result) {
+            res.json({
+                status: "SUCCESS",
+                message: "Signin successful",
+                data: data
+            });
+        } else {
             res.json({
                 status: "FAILED",
-                message: "An error occured while checking for existing user"
-            })
-        })
+                message: "Invalid password entered!"
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({
+            status: "FAILED",
+            message: "An error occurred while checking for existing user"
+        });
     }
 });
 
-module.exports = router ;
+//Update Profile
+router.put('/update-profile/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { fullName, mobileNumber, email } = req.body;
+
+        const updateData = {};
+        if (fullName) updateData.name = fullName;
+        if (mobileNumber) updateData.mobileNumber = mobileNumber;
+        if (email) {
+            const trimmedEmail = trimString(email);
+            if (trimmedEmail === "") {
+                return res.json({
+                    status: "FAILED",
+                    message: "Email cannot be empty"
+                });
+            }
+            updateData.email = trimmedEmail;
+        }
+
+        const updatedUser = await updateUserProfile(userId, updateData);
+
+        res.json({
+            status: "SUCCESS",
+            message: "Profile updated successfully",
+            data: updatedUser
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            status: "FAILED",
+            message: error.message || "An error occurred while updating profile"
+        });
+    }
+});
+
+// Upload Profile Picture
+router.post('/upload-profile-picture/:userId', upload.single('profilePicture'), async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        if (!req.file) {
+            return res.json({
+                status: "FAILED",
+                message: "No file uploaded."
+            });
+        }
+
+        // Upload image to Cloudinary
+        const base64Image = req.file.buffer.toString('base64');
+        const dataUri = `data:${req.file.mimetype};base64,${base64Image}`;
+        const publicId = `profile_picture_${userId}_${uuidv4()}`;
+        const result = await cloudinary.uploader.upload(dataUri, {
+            upload_preset: 'airline_management',
+            folder: 'airline_profile_pictures',
+            public_id: publicId,
+            quality: "auto",
+            fetch_format: "auto",
+            type: 'private',
+            resource_type: 'image'
+        });
+
+        // Generate a signed URL that expires in 1 hour
+        const signedUrl = cloudinary.url(result.public_id, {
+            sign_url: true,
+            type: 'private',
+            expires_at: Math.floor(Date.now() / 1000) + 3600, // URL expires in 1 hour
+            secure: true // Ensure HTTPS delivery
+        });
+
+        // Update user's profilePicture field with the signed URL
+        const updatedUser = await updateUserProfile(userId, { profilePicture: result.public_id });
+
+        res.json({
+            status: "SUCCESS",
+            message: "Profile picture uploaded and updated successfully",
+            data: { ...updatedUser._doc, profilePicture: signedUrl } // Send signed URL to frontend for display
+        });
+
+    } catch (error) {
+        console.error("Error uploading profile picture:", error);
+        let errorMessage = "An unknown error occurred during profile picture upload.";
+        if (error.http_code && error.http_code === 400 && error.message) {
+            // Cloudinary API error (e.g., bad request, invalid parameters)
+            errorMessage = `Cloudinary Error: ${error.message}`;
+        } else if (error.message) {
+            // General error message
+            errorMessage = error.message;
+        } else if (error.response && error.response.data && error.response.data.error && error.response.data.error.message) {
+            // Axios-like error structure from fetch when response is not OK
+            errorMessage = `API Error: ${error.response.data.error.message}`;
+        }
+
+        res.json({
+            status: "FAILED",
+            message: errorMessage
+        });
+    }
+});
+
+// Remove Profile Picture
+router.delete('/remove-profile-picture/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const userData = await user.findById(userId);
+        if (!userData || !userData.profilePicture) {
+            return res.json({
+                status: "FAILED",
+                message: "No profile picture to remove."
+            });
+        }
+
+        // Use the stored public_id directly
+        const publicId = userData.profilePicture;
+
+        // Delete the image from Cloudinary
+        await cloudinary.uploader.destroy(publicId, { type: 'private' });
+
+        // Update user's profilePicture field to null in the database
+        const updatedUser = await updateUserProfile(userId, { profilePicture: null });
+
+        res.json({
+            status: "SUCCESS",
+            message: "Profile picture removed successfully",
+            data: updatedUser
+        });
+
+    } catch (error) {
+        console.error("Error removing profile picture:", error);
+        res.json({
+            status: "FAILED",
+            message: error.message || "An error occurred while removing profile picture"
+        });
+    }
+});
+
+// Refresh Profile Picture URL
+router.get('/refresh-profile-picture/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        
+        // Get the user's current profile picture public_id
+        const userData = await user.findById(userId);
+        if (!userData || !userData.profilePicture) {
+            return res.json({
+                status: "FAILED",
+                message: "No profile picture found"
+            });
+        }
+
+        // Use the stored public_id directly
+        const publicId = userData.profilePicture;
+
+        // Generate a new signed URL
+        const signedUrl = cloudinary.url(publicId, {
+            sign_url: true,
+            type: 'private',
+            expires_at: Math.floor(Date.now() / 1000) + 3600, // URL expires in 1 hour
+            secure: true // Ensure HTTPS delivery
+        });
+
+        // Update the user's profile picture URL in DB (still storing public_id)
+        // But send the signed URL to the frontend
+        const updatedUser = await updateUserProfile(userId, { profilePicture: publicId });
+
+        res.json({
+            status: "SUCCESS",
+            message: "Profile picture URL refreshed successfully",
+            data: { ...updatedUser._doc, profilePicture: signedUrl }
+        });
+
+    } catch (error) {
+        console.error("Error refreshing profile picture URL:", error);
+        res.json({
+            status: "FAILED",
+            message: error.message || "An error occurred while refreshing profile picture URL"
+        });
+    }
+});
+
+module.exports = router;
