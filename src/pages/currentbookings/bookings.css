@@ -1,4 +1,4 @@
- .bookings-container {
+.current-bookings-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,9 +8,9 @@
     width: 80%;
     margin-left: 10%;
     height: 75%;
-  }
-  
-  .back-button-book {
+}
+
+.back-button-book {
     align-self: flex-start;
     padding: 10px 20px;
     margin-bottom: 20px;
@@ -21,21 +21,21 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-  }
-  
-  .back-button-book:hover {
+}
+
+.back-button-book:hover {
     background-color: #aaa;
-  }
-  
-  .tabs-book  {
+}
+
+.tabs-book  {
     display: flex;
     justify-content: space-around;
     width: 100%;
     max-width: 800px;
     margin-bottom: 20px;
-  }
-  
-  .tab-book {
+}
+
+.tab-book {
     flex: 1;
     padding: 20px;
     text-align: center;
@@ -46,18 +46,18 @@
     font-weight: bold;
     margin: 0 10px;
     transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .tab-book:hover {
+}
+
+.tab-book:hover {
     background-color: #feb47b;
     transform: scale(1.05);
-  }
-  
-  .tab-book.active {
+}
+
+.tab-book.active {
     background-color: #feb47b;
-  }
-  
-  .book-cont{
+}
+
+.book-cont{
     background-color: white;
     width: 70%;
     border-radius: 20px;
@@ -69,43 +69,39 @@
     box-shadow: #aaa;
     justify-content: center;
     align-items: center;
-  }
-  
-  
+}
 
-  .col0-book{
+.col0-book{
     margin-top: 10px;
     width: 25%;
     margin-right: 5%;
-  }
-  .col1-book{
+}
+.col1-book{
     width: 20%;
     margin-left: 5%;
-  }
-  .col2-book{
+}
+.col2-book{
     width: 20%;
-
-  }
-  .col3-book{
+}
+.col3-book{
     width: 25%;
     margin-left: 5%;
     margin-bottom: 5%;
-  }
-  .col4-book{
+}
+.col4-book{
     width: 20%;
-   
-  }
-  .content-book{
+}
+.content-book{
     width: 90%;
     margin-left: 5%;
-  }
-  .bookings-content{
+}
+.bookings-content{
     margin-left: 15%;
     justify-content: center;
     align-items: center;
-  }
-  .bookings-content p{
+}
+.bookings-content p{
     justify-content: center;
     align-items: center;
     margin-left: 30%;
-  }
+}

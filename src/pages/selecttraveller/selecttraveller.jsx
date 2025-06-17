@@ -57,7 +57,7 @@ const Selecttravaeller = () => {
                     </p>
                 </div>
             </div>
-            <div className="contain">
+            <div className="traveller-container">
                 <div id="traveler-info-form">
                     {/* <div className="form-group gender-options">
                         <label>

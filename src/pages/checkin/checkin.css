@@ -1,81 +1,103 @@
+.checkin-page-wrapper {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 64px;
+    background: #fff5e6;
+}
+
 .content-checkin {
-    width: 50%;
-    max-width: 800px;
+    width: 400px;
     margin: 0 auto;
     text-align: center;
-    background-color:#ff7e5f;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .h1 {
-    margin-top :90px;
-    margin-bottom: 20px;
-  }
-  .content-checkin h1{
-    color:white;
-    font-size: 50px;
-  }
-   
-  .content-checkin p{
-    color:white;
-  }
+    background-color: #fff;
+    padding: 32px 28px 24px 28px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(118, 50, 154, 0.10), 0 1.5px 6px rgba(0,0,0,0.08);
+}
 
-  
-  .description-checkin p {
+.content-checkin h1{
+    color: #ff8a08;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.content-checkin p{
+    color: #444;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+}
+
+.description-checkin p {
     margin: 10px 0;
-  }
-  
-  .description-checkin a {
+}
+
+.description-checkin a {
     color: #ffdd00;
     text-decoration: none;
-  }
-  
-  .description-checkin a:hover {
+}
+
+.description-checkin a:hover {
     text-decoration: underline;
-  }
-  
-  .form-checkin {
+}
+
+.form-checkin {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .form-group-checkin {
+}
+
+.form-group-checkin {
     width: 100%;
     margin-bottom: 15px;
-  }
-  
-  .label-checkin {
+}
+
+.label-checkin {
     display: block;
     margin-bottom: 5px;
-    font-weight:bold;
-    color:white;
-  }
-  
-  .input-checkin[type="text"] {
-    width: calc(100% - 20px);
-    padding: 8px;
+    font-weight: 600;
+    color: #222;
+    text-align: left;
+    font-size: 1.05rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .button-checkin {
-    background-color: #f8f5f2;
-    color: rgb(234, 104, 34);
+    border-radius: 6px;
+    background-color: #fafafa;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    transition: border 0.2s;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    border: 1.5px solid #ff8a08;
+    outline: none;
+}
+
+.button-checkin {
+    padding: 12px;
+    background-color: #ff8a08;
+    color: white;
     border: none;
-    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 4px;
-    margin-top:20px;
-    font-weight:bold;
-    width:20%;
-    margin-left:240px;
-  }
-  
-  .button-checkin:hover {
-    background-color: #f1eded;
-  }
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(255, 138, 8, 0.08);
+    width: 100%;
+}
+
+.button-checkin:hover {
+    background-color: #FF6504;
+    box-shadow: 0 4px 16px rgba(255, 138, 8, 0.12);
+}
  
   

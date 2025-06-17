@@ -24,6 +24,7 @@ import ProfileEdit from './pages/profile_edit/profile_edit.jsx';
 import BookingsPage from './pages/currentbookings/bookings.jsx';
 import PreferencesPage from './pages/preferences/preference.jsx';
 import NotificationsPage from './pages/Notification/notification.jsx';
+import { AuthContextProvider } from './auth/AuthContext';
 
 
 function App() {
@@ -47,32 +48,33 @@ function App() {
     baggage:''
   });
   return (
-    <BrowserRouter>
-     <Navbar />
-     <Routes>
-         <Route path='/' element = {<Info.Provider value={{allInf,setAllInf}}><Home/></Info.Provider>} />
-         <Route path='/searchflights' element={<Info.Provider value={{allInf,setAllInf}}><Searchflights/></Info.Provider>} />
-         <Route path = '/flightdisplay' element={<Info.Provider value={{allInf,setAllInf}}><Flightsdisplay /></Info.Provider>} />
-         <Route path = '/priceconfirmationpage' element={<Info.Provider value={{allInf,setAllInf}}><Priceconfirmationpage /></Info.Provider>} /> 
-         <Route path='/selecttraveller' element={<Info.Provider value={{allInf,setAllInf}}><Selecttravaeller /></Info.Provider>} />
-         <Route path='/seatselection' element ={<Info.Provider value={{allInf,setAllInf}}><Seatselection /></Info.Provider>} />
-         <Route path='/finalconfirmation' element={<Info.Provider value={{allInf,setAllInf}}><Finalconfirmation /></Info.Provider>} />
-         <Route path ='/bookingsuccess' element={<Bookingsuccess />} />
-         <Route path = '/login' element = {<LoginPage />} />
-         <Route path = '/signup' element = {<Signup_page />} />
-         <Route path='/checkin' element={<Info.Provider value={{allInf,setAllInf}}><CheckInForm/></Info.Provider>} />
-         <Route path='/CheckInDetails' element={<Info.Provider value={{allInf,setAllInf}}><CheckInDetails/></Info.Provider>} />
-         <Route path='/Itinerary' element={<Info.Provider value={{allInf,setAllInf}}><Itinerary/></Info.Provider>} />
-         <Route path='/Confirmation' element={<Info.Provider value={{allInf,setAllInf}}><Confirmation/></Info.Provider>} />
-         <Route path="/" element={<Profile />} />
-          <Route path="/Profile" element={<ProfileProvider><Profile /></ProfileProvider>} />
-          <Route path="/ProfileEdit" element={<ProfileProvider><ProfileEdit /></ProfileProvider>} />
-          <Route path="/BookingsPage" element={<BookingsPage />} />
-          <Route path="/PreferencesPage" element={<PreferencesPage />} />
-          <Route path="/NotificationsPage" element={<NotificationsPage />} />
-     </Routes>
+    <AuthContextProvider>
+      <BrowserRouter>
+      <Navbar />
+      <Routes>
+          <Route path='/' element = {<Info.Provider value={{allInf,setAllInf}}><Home/></Info.Provider>} />
+          <Route path='/searchflights' element={<Info.Provider value={{allInf,setAllInf}}><Searchflights/></Info.Provider>} />
+          <Route path = '/flightdisplay' element={<Info.Provider value={{allInf,setAllInf}}><Flightsdisplay /></Info.Provider>} />
+          <Route path = '/priceconfirmationpage' element={<Info.Provider value={{allInf,setAllInf}}><Priceconfirmationpage /></Info.Provider>} /> 
+          <Route path='/selecttraveller' element={<Info.Provider value={{allInf,setAllInf}}><Selecttravaeller /></Info.Provider>} />
+          <Route path='/seatselection' element ={<Info.Provider value={{allInf,setAllInf}}><Seatselection /></Info.Provider>} />
+          <Route path='/finalconfirmation' element={<Info.Provider value={{allInf,setAllInf}}><Finalconfirmation /></Info.Provider>} />
+          <Route path ='/bookingsuccess' element={<Bookingsuccess />} />
+          <Route path = '/login' element = {<LoginPage />} />
+          <Route path = '/signup' element = {<Signup_page />} />
+          <Route path='/checkin' element={<Info.Provider value={{allInf,setAllInf}}><CheckInForm/></Info.Provider>} />
+          <Route path='/CheckInDetails' element={<Info.Provider value={{allInf,setAllInf}}><CheckInDetails/></Info.Provider>} />
+          <Route path='/Itinerary' element={<Info.Provider value={{allInf,setAllInf}}><Itinerary/></Info.Provider>} />
+          <Route path='/Confirmation' element={<Info.Provider value={{allInf,setAllInf}}><Confirmation/></Info.Provider>} />
+           <Route path="/Profile" element={<ProfileProvider><Profile /></ProfileProvider>} />
+           <Route path="/ProfileEdit" element={<ProfileProvider><ProfileEdit /></ProfileProvider>} />
+           <Route path="/BookingsPage" element={<BookingsPage />} />
+           <Route path="/PreferencesPage" element={<PreferencesPage />} />
+           <Route path="/NotificationsPage" element={<NotificationsPage />} />
+      </Routes>
 
-    </BrowserRouter>
+     </BrowserRouter>
+     </AuthContextProvider>
   );
 }
 

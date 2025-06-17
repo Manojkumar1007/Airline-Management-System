@@ -46,7 +46,7 @@ const Searchflights = () => {
         <center>
           <form onSubmit={handleSubmit}>
             <div className='form-grp'>
-              <label>From:🛫</label><br />
+              <label>From: 🛫</label><br />
               <select name='startingCity' value={searchInf.startingCity} onChange={handleChange} required>
                 <option value='' disabled>Select departure city</option>
                 <option value='Bangalore'>Bangalore</option>
@@ -58,7 +58,7 @@ const Searchflights = () => {
               </select><br />
             </div>
             <div className='to-grp'>
-              <label>To:🛬</label><br />
+              <label>To: 🛬</label><br />
               <select name='destinationCity' value={searchInf.destinationCity} onChange={handleChange} required>
                 <option value='' disabled>Select destination city</option>
                 <option value='Guwahati'>Guwahati</option>
@@ -70,12 +70,12 @@ const Searchflights = () => {
               </select><br />
             </div>
             <div className='date-grp'>
-              <label>Departure Date</label><br />
+              <label>Departure Date: 🕒</label><br />
               <input type='date' name='travelDate' value={searchInf.travelDate} onChange={handleChange} required/>
             </div>
             <div>
               {/* <button type='button' className='search-btn' onClick={() => setSearch(true)}>Search Flights🔍</button><br /> */}
-              <button type='submit' className='search-btn'>Search Flights🔍</button>
+              <button type='submit' className='search-btn'>Search Flights 🔍</button>
             </div>
           </form>
         </center>

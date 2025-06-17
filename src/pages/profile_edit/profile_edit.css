@@ -1,82 +1,193 @@
+/* General body and container styling */
 .body-container {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f5f5f5;
-  }
-  
-  .edit-container {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically as well */
+    min-height: calc(100vh - 70px); /* Adjust for fixed navbar height */
+    background-color: #f0f2f5; /* A very light, subtle background color */
+    margin-top: 70px; /* Offset for fixed navbar */
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px; /* Add some overall page padding */
+}
+
+.edit-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: #f5f5f5;
-    height: 75vh;
-    width: 70%;
-    margin-left: 15%;
-    border-radius: 20px;
-  }
-  
-  .edit-header {
+    width: 500px; /* Further increased width for a larger card */
+    max-width: 90%;
+    margin: 50px 0;
+    gap: 25px;
+}
+
+.edit-container:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+/* Header Styling */
+.edit-header {
     display: flex;
     align-items: center;
-    width:65%;
-    color: white;
-    padding: 10px 20px;
-    position: relative;
-    
-  }
-  
-  .back-btn-edit {
-    background: none;
-    border: none;
-    color: orange;
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 20px;
-    margin-left:-40px;
-  }
-  
-  .edit-h2 {
-    margin-left: 10px;
-    color:white;
-    position: absolute;
-    padding: 10px 20px;
-    background-color: orange;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  }
-  
-  .profile-form {
+    justify-content: center; /* Center the title */
     width: 100%;
-    max-width: 800px;
-    background-color: #fff;
-    padding: 20px;
+    margin-bottom: 30px; /* Space below the header */
+}
+
+.back-btn-edit {
+    background-color: transparent; /* No background */
+    border: none;
+    color: #ff8a08; /* Consistent orange from your theme */
+    font-size: 0.9rem; /* Smaller arrow for maximum subtlety */
+    cursor: pointer;
+    padding: 3px 5px; /* Reduced padding for a very small visual footprint */
+    border-radius: 8px; /* Consistent rounded corners */
+    transition: color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+}
+
+.back-btn-edit:hover {
+    background-color: #ff8a08; /* Solid orange on hover */
+    color: white; /* White text on hover */
+    transform: translateX(-3px); /* Subtle slide effect */
+}
+
+.edit-h2 {
+    margin: 0; /* Remove auto margins to allow it to sit at the start of the flex container */
+    color: #ff8a08; /* Consistent orange for the title */
+    font-size: 1.8rem; /* Adjusted title size for better balance */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Form Styling */
+.profile-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Increased gap for more breathing room between form groups */
+}
+
+.mobile-input-group {
+    display: flex;
+    gap: 10px; /* Space between dropdown and input */
+    width: 100%;
+    position: relative; /* For dropdown positioning */
+    z-index: 2; /* Ensure dropdown is above other elements */
+}
+
+.country-code-wrapper {
+    position: relative; /* Context for absolute dropdown */
+    width: 70px; /* Fixed width for the country code section */
+    flex-shrink: 0;
+}
+
+.country-code-input {
+    padding: 12px 15px;
     border-radius: 8px;
-    margin-left:120px;
-    margin-top:15px;
-    margin-right:120px;
-    box-shadow: 0 0 10px rgb(236, 65, 35);
-  }
-  
-  .edit-label {
-    margin-top: 20px;
-  }
-  
-  .edit-input {
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .save-edit {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #ff7e5f;
+    border: 1px solid #d0d0d0;
+    font-size: 1rem;
+    color: #333d47;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Take full width of its wrapper */
+    flex-shrink: 0; /* Keep it from shrinking */
+}
+
+.country-code-input:focus {
+    outline: none;
+    border-color: #ff8a08;
+    box-shadow: 0 0 0 3px rgba(255, 138, 8, 0.2);
+}
+
+.country-code-dropdown-list {
+    position: absolute;
+    top: 100%; /* Position below the input */
+    left: 0;
+    width: 100%; /* Make it span the full width of the country-code-wrapper */
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    max-height: 200px; /* Limit height and enable scrolling */
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0; /* Space below input */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.country-code-dropdown-list li {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333d47;
+}
+
+.country-code-dropdown-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.mobile-input {
+    flex-grow: 1; /* Allow input to take remaining space */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-label {
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 8px; /* Optimized space between label and input */
+    display: block;
+    font-size: 1.1rem; /* Increased font size for better readability */
+}
+
+.edit-input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #d0d0d0; /* A very subtle grey border */
+    font-size: 1rem;
+    color: #333d47;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: #ff8a08;
+    box-shadow: 0 0 0 3px rgba(255, 138, 8, 0.2);
+}
+
+/* Save Button Styling */
+.save-edit {
+    margin-top: 30px; /* Adjusted space above the button */
+    padding: 12px 25px; /* Slightly smaller button */
+    background-color: #ff8a08; /* Vibrant orange */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px; /* Smoothly rounded button */
     cursor: pointer;
-  }
+    font-size: 1.05rem; /* Slightly smaller font */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    align-self: center; /* Center the button within the flex container */
+    width: 60%; /* Make button take more width */
+    max-width: 200px;
+}
+
+.save-edit:hover {
+    background-color: #e06d00; /* Darker orange on hover */
+    transform: translateY(-3px); /* More pronounced lift effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Soft shadow on hover */
+}
   

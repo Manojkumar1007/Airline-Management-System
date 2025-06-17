@@ -45,7 +45,7 @@ const BookingsPage = () => {
   }
 
   return (
-    <div className="bookings-container">
+    <div className="current-bookings-container">
       <button className="back-button-book" onClick={handleBackClick}>
         Back
       </button>

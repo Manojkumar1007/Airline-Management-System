@@ -21,28 +21,30 @@ const CheckInForm = () => {
   };
 
   return (
-    <div className="content-checkin">
-      <h1>Web Check-In</h1>
-      <p>Web Checkin for passengers is available 48 hrs to 60 mins before domestic flight departure, and 24 hrs to 75 mins before international flight departure.</p>
-      <form onSubmit={handleSubmit}>
-        <label className="label-checkin" htmlFor="bookingId">PNR/Booking Reference:</label>
-        <input
-          type="text"
-          id="bookingId"
-          value={pnr}
-          onChange={(e) => setPnr(e.target.value)}
-          required
-        />
-        <label className="label-checkin" htmlFor="lastName">Last Name:</label>
-        <input
-          type="text"
-          id="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-        <button className="button-checkin" type="submit">Check-In</button>
-      </form>
+    <div className="checkin-page-wrapper">
+      <div className="content-checkin">
+        <h1>Web Check-In</h1>
+        <p>Web Checkin for passengers is available 48 hrs to 60 mins before domestic flight departure, and 24 hrs to 75 mins before international flight departure.</p>
+        <form onSubmit={handleSubmit}>
+          <label className="label-checkin" htmlFor="bookingId">PNR/Booking Reference:</label>
+          <input
+            type="text"
+            id="bookingId"
+            value={pnr}
+            onChange={(e) => setPnr(e.target.value)}
+            required
+          />
+          <label className="label-checkin" htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <button className="button-checkin" type="submit">Check-In</button>
+        </form>
+      </div>
     </div>
   );
 };

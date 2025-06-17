@@ -79,6 +79,7 @@ router.post('/signup',(req,res) => {
     }else{
         //checking for if user already exists
         user.find({email}).then(result => {
+            console.log("Result from user.find({email}):", result);
             if(result.length){
                 //A user already exists
                 res.json({
@@ -128,7 +129,7 @@ router.post('/signup',(req,res) => {
 //send verification email
 const sendVerificationEmail = ({_id,email}, res) => {
     //url to be used in the email
-    const currentUrl = "http://localhost:5000/" ;
+    const currentUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}/` ;
 
     const uniqueString = uuidv4() + _id;
 

@@ -10,7 +10,7 @@ const NotificationsPage = () => {
   };
 
   return (
-    <div className="notifications-container">
+    <div className="notification-container">
       <button className="back-button-notif" onClick={handleBackClick}>Back</button>
       <h1>Notifications</h1>
       <div className="notifications-content">
