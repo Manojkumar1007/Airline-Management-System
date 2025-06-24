@@ -10,6 +10,30 @@ A full-stack web application for managing airline bookings, user profiles, fligh
 - Admin panel for managing flights and bookings
 - Email notifications
 
+## Technologies Used
+
+**Frontend:**
+- React
+- Vite
+- CSS
+
+**Backend:**
+- Node.js
+- Express.js
+
+**Database:**
+- MongoDB
+- Mongoose (ODM for MongoDB)
+
+**Email & Media:**
+- Nodemailer (for sending emails)
+- Cloudinary (for image/media storage)
+
+**Other/Dev Tools:**
+- dotenv (for environment variables)
+- ESLint (for linting)
+- Git & GitHub (version control)
+
 ## Screenshots
 
 ### Home Page
