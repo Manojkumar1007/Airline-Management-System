@@ -91,10 +91,10 @@ npm install
 
 ```bash
 cd backend
-npm start
+npm run serve
 ```
 
-By default, the backend runs on `http://localhost:5000`.
+By default, the backend runs on `http://localhost:3000`.
 
 ### 2. Start the Frontend (React + Vite)
 
